@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vit_connects/main.dart';
 import './signinpage.dart';
+import './form.dart';
 
 class LandingPage extends StatelessWidget {
   Widget _button(String textt, BuildContext context) {
@@ -12,7 +13,7 @@ class LandingPage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SignInPage()),
+            MaterialPageRoute(builder: (context) => Forms()),
           );
         },
         color: buttonc,

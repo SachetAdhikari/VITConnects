@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vit_connects/signinpage.dart';
 import './landingpage.dart';
+import './form.dart';
 
 void main() {
   runApp(VitConnects());
@@ -18,8 +19,8 @@ class VitConnects extends StatelessWidget {
       title: "VIT CONNECTS",
       routes: {
         '/': (_) => LandingPage(),
-        '/signinpage': (_) => SignInPage(),
-        //'/form':(_)=>Menu(),
+        //'/signinpage': (_) => SignInPage(),
+        '/form': (_) => Forms(),
       },
     );
   }

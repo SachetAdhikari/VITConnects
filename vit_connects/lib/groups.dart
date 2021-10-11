@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:draggable_fab/draggable_fab.dart';
 import './main.dart';
 import './form.dart';
+import './sidemenu.dart';
 
 //import './sidemenu.dart';
 class GroupPage extends StatefulWidget {
@@ -41,9 +42,7 @@ class _GroupPageState extends State<GroupPage> {
           child: Icon(Icons.add),
         ),
       ),
-      drawer: Drawer(
-          //child: SideMenu())
-          ),
+      drawer: Drawer(child: SideMenu()),
       appBar: AppBar(
         backgroundColor: pc,
         title: Text("Groups"),

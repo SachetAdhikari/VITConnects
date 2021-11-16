@@ -11,6 +11,7 @@ void main() {
 final Color bg = Color(0xffA49F9F);
 final Color pc = Color(0xff100202);
 final Color buttonc = Color(0xff2EF31D);
+final Color bc = Color.fromARGB(255, 103, 137, 131);
 
 class VitConnects extends StatelessWidget {
   @override

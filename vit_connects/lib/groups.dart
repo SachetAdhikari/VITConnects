@@ -39,15 +39,16 @@ class _GroupPageState extends State<GroupPage> {
               MaterialPageRoute(builder: (context) => Forms()),
             );
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       ),
       drawer: Drawer(child: SideMenu()),
       appBar: AppBar(
         backgroundColor: pc,
-        title: Text("Groups"),
+        title:
+            const Text("Groups", style: TextStyle(fontFamily: 'ProximaNova')),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.list_outlined,
           ),
           onPressed: () {},

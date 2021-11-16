@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vit_connects/groups.dart';
 import 'package:vit_connects/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,6 +24,10 @@ class _SignInPageState extends State<SignInPage> {
         elevation: 0,
         height: 60,
         onPressed: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => GroupPage()),
+          );
           //startSignIn();
           //if (_formKey.currentState.validate()) {
           // print(email);

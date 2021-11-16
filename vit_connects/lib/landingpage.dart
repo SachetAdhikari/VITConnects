@@ -13,7 +13,7 @@ class LandingPage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Forms()),
+            MaterialPageRoute(builder: (context) => SignInPage()),
           );
         },
         color: buttonc,
@@ -57,7 +57,7 @@ class LandingPage extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.fromLTRB(25, 0, 0, 0),
                     child: Text(
-                      '\nWELCOME\nTO\nVITCONNECTS',
+                      "\nWELCOME\nTO\nVIT CONNECT's",
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,

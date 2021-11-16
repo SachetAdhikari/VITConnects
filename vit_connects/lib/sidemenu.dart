@@ -11,26 +11,33 @@ class SideMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text(
-              'Welcome!!!',
-              style: TextStyle(
-                  fontSize: 32, color: Colors.white, fontFamily: 'Red Rose'),
+            child: const Center(
+              child: const Text(
+                'Welcome!!!',
+                style: TextStyle(
+                    fontSize: 32,
+                    color: Colors.white,
+                    fontFamily: 'ProximaNova'),
+              ),
             ),
             decoration: BoxDecoration(
               color: pc,
             ),
           ),
           ListTile(
-              leading: Icon(Icons.verified_user),
-              title: Text('Profile'),
+              leading: const Icon(Icons.verified_user),
+              title: const Text('Profile',
+                  style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {Navigator.of(context).pop()}),
           ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings',
+                  style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {Navigator.of(context).pop()}),
           ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Log Out'),
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text('Log Out',
+                  style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {Navigator.of(context).pop()}),
         ],
       ),

@@ -3,6 +3,8 @@ import 'package:vit_connects/signinpage.dart';
 import './landingpage.dart';
 import './form.dart';
 import './groups.dart';
+import 'package:vit_connects/registration_screen.dart';
+
 
 void main() {
   runApp(VitConnects());
@@ -24,6 +26,7 @@ class VitConnects extends StatelessWidget {
         '/signinpage': (_) => SignInPage(),
         '/groups': (_) => GroupPage(),
         './join': (_) => Forms(),
+        '/register': (_) => RegistrationScreen(),
       },
     );
   }

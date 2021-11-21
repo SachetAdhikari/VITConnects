@@ -3,6 +3,11 @@ import 'package:vit_connects/groups.dart';
 import 'package:vit_connects/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:vit_connects/registration_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'chat_screen.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -13,9 +18,20 @@ class SignInPage extends StatefulWidget {
 final Color cc = Color(0xFFC4C4C4);
 
 class _SignInPageState extends State<SignInPage> {
+  @override
+  void initState() {
+    super.initState();
+    Firebase.initializeApp().whenComplete(() {
+      print("firebase initialization completed");
+      setState(() {});
+    });
+  }
+
+  final _auth = FirebaseAuth.instance;
+
   final _formKey = GlobalKey<FormState>();
-  String email = '';
-  String password = '';
+  String email='';
+  String password='';
   String error = '';
   Widget _button(String textt) {
     return Container(
@@ -45,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
             Text(
               textt,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),
             ),
           ],
@@ -67,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.white),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(63.0),
                 topRight: Radius.circular(63.0),
                 bottomLeft: Radius.circular(63.0),
@@ -75,21 +91,21 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             child: Column(children: <Widget>[
-              SizedBox(height: 30),
-              Text(
+              const SizedBox(height: 30),
+              const Text(
                 'Log In',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 46.0,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 200, top: 10),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 200, top: 10),
                       child: Text(
                         'Username',
                         style: TextStyle(
@@ -100,11 +116,11 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           right: 25.0, left: 25.0, bottom: 20.0, top: 5.0),
                       child: TextFormField(
                         //validator: (val) => val.isEmpty ? 'Enter an Email' : null,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           //labelText: 'Username',
                           hintText: 'Username',
@@ -112,14 +128,15 @@ class _SignInPageState extends State<SignInPage> {
                           //hoverColor: cc,
                           //focusColor: cc,
                         ),
-
-                        onChanged: (val) {
-                          setState(() => email = val);
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (value) {
+                          setState(() => email = value);
                         },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 200),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 200),
                       child: Text(
                         'Password',
                         style: TextStyle(
@@ -130,24 +147,69 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           right: 25.0, left: 25.0, bottom: 30.0, top: 5.0),
                       child: TextFormField(
                         //validator: (val) =>
                         //  val.length < 8 ? 'Passcode must be 6+' : null,
                         obscureText: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           //labelText: 'Password',
                           hintText: 'Password',
                         ),
-                        onChanged: (val) {
-                          setState(() => password = val);
+                        textAlign: TextAlign.center,
+                        onChanged: (value) {
+                          setState(() => password = value);
                         },
                       ),
+                    ),Material(
+            color: Colors.black87,
+            borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+            elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () async{
+                        try {
+                          final user = await _auth
+                              .signInWithEmailAndPassword(
+                              email: email, password: password);
+                          if(user != null){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()),);
+                          }
+                        }
+                        catch(e){
+                          print(e);
+                        }
+                      },
+                      minWidth: 200.0,
+                      height: 42.0,
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                    _button('Log In'),
-                    SizedBox(
+                    ),
+                    // ElevatedButton.icon(
+                    //   style: ElevatedButton.styleFrom(
+                    //     primary: pc,
+                    //     onPrimary: Colors.white,
+                    //     minimumSize: Size(250, 60),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(30),
+                    //     ),
+                    //   ),
+                    //   icon: const FaIcon(
+                    //     FontAwesomeIcons.google,
+                    //     color: Colors.red,
+                    //   ),
+                    //   label: Text('Login'),
+                    //   onPressed: () {
+                    //     print(email);
+                    //     print(password);
+                    //
+                    //   },
+                    // ),
+                    const SizedBox(
                       height: 30,
                     ),
                     ElevatedButton.icon(
@@ -159,16 +221,13 @@ class _SignInPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      icon: FaIcon(
+                      icon: const FaIcon(
                         FontAwesomeIcons.google,
                         color: Colors.red,
                       ),
                       label: Text('Sign Up With Google'),
-                      onPressed: () {
-                        // final provider = Provider.of<GoogleSignInProvider>(
-                        //     context,
-                        //     listen: false);
-                        // provider.googleLogin();
+                      onPressed: () async {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen()),);
                       },
                     )
                   ],

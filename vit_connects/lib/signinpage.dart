@@ -4,7 +4,7 @@ import 'package:vit_connects/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vit_connects/registration_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'chat_screen.dart';
@@ -19,13 +19,13 @@ final Color cc = Color(0xFFC4C4C4);
 
 class _SignInPageState extends State<SignInPage> {
   @override
-  void initState() {
-    super.initState();
-    Firebase.initializeApp().whenComplete(() {
-      print("firebase initialization completed");
-      setState(() {});
-    });
-  }
+  // void initState() {
+  //   super.initState();
+  //   Firebase.initializeApp().whenComplete(() {
+  //     print("firebase initialization completed");
+  //     setState(() {});
+  //   });
+  // }
 
   final _auth = FirebaseAuth.instance;
 

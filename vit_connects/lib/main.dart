@@ -38,7 +38,7 @@ class VitConnects extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: "VIT CONNECTS",
           routes: {
-            '/': (_) => LandingPage(),
+            '/': (_) => Forms(),
             '/signinpage': (_) => SignInPage(),
             '/groups': (_) => GroupPage(),
             './join': (_) => Forms(),

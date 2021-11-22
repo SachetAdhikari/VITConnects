@@ -22,22 +22,28 @@ final Color cc = Color(0xFFC4C4C4);
 
 class _SignInPageState extends State<SignInPage> {
   @override
-  void showAlert(BuildContext context,String title,String content){
+  void showAlert(BuildContext context, String title, String content) {
     print('Alert');
     var alertDialogue = AlertDialog(
       title: Text(title),
       content: Text(content),
-      actions:[
+      actions: [
         // FloatingActionButton(onPressed: onPressed)Action(child: Text('Ok'),),
-        FlatButton(child: Text('Ok'),onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()),); },
-
+        FlatButton(
+          child: Text('Ok'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SignInPage()),
+            );
+          },
         )
       ],
       elevation: 24.0,
     );
-    showDialog(context: context,
-      builder:(_)=>alertDialogue,
+    showDialog(
+      context: context,
+      builder: (_) => alertDialogue,
       barrierDismissible: false,
     );
   }
@@ -47,8 +53,8 @@ class _SignInPageState extends State<SignInPage> {
   final _auth = FirebaseAuth.instance;
 
   final _formKey = GlobalKey<FormState>();
-  String email='';
-  String password='';
+  String email = '';
+  String password = '';
   String error = '';
   Widget _button(String textt) {
     return Container(
@@ -180,31 +186,35 @@ class _SignInPageState extends State<SignInPage> {
                           setState(() => password = value);
                         },
                       ),
-                    ),Material(
-            color: Colors.black87,
-            borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-            elevation: 5.0,
-                    child: MaterialButton(
-                      onPressed: () async{
-                        try {
-                          final user = await _auth
-                              .signInWithEmailAndPassword(
-                              email: email, password: password);
-                          if(user != null){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()),);
-                          }
-                        }
-                        catch(e){
-                          print(e);
-                        }
-                      },
-                      minWidth: 200.0,
-                      height: 42.0,
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white),
-                      ),
                     ),
+                    Material(
+                      color: Colors.black87,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(30.0)),
+                      elevation: 5.0,
+                      child: MaterialButton(
+                        onPressed: () async {
+                          try {
+                            final user = await _auth.signInWithEmailAndPassword(
+                                email: email, password: password);
+                            if (user != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatScreen()),
+                              );
+                            }
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        minWidth: 200.0,
+                        height: 42.0,
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
                     // ElevatedButton.icon(
                     //   style: ElevatedButton.styleFrom(
@@ -230,40 +240,44 @@ class _SignInPageState extends State<SignInPage> {
                       height: 30,
                     ),
                     ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        primary: pc,
-                        onPrimary: Colors.white,
-                        minimumSize: Size(250, 60),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                        style: ElevatedButton.styleFrom(
+                          primary: pc,
+                          onPrimary: Colors.white,
+                          minimumSize: Size(250, 60),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
-                      ),
-                      icon: const FaIcon(
-                        FontAwesomeIcons.google,
-                        color: Colors.red,
-                      ),
-                      label: Text('Sign Up With Google'),
-                      onPressed: ()  {
-                        controller.login();
-                        print('signup successfull');
-                        print(controller.googleAccount.value?.email??'');
-                        String emailz= controller.googleAccount.value?.email??'';
-                        // String emailz='sachet.adhikari2019@vitstudent.ac.in';
-                        List isVitian = emailz.split('@');
-                        if(isVitian[1]=='vitstudent.ac.in'){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen(email: emailz,)),);
-                          controller.logout();
-                          print('logged out');
-                        }
-                        else{
-                                  showAlert(context, 'Not VITian?',
-                                      'Looks Like You are not VITian. To continue using the app, signup with your VIT mail!');
-                                  controller.logout();
-                                  print('logged out');
-                        }
-
-                        }
-                    )
+                        icon: const FaIcon(
+                          FontAwesomeIcons.google,
+                          color: Colors.red,
+                        ),
+                        label: Text('Sign Up With Google'),
+                        onPressed: () {
+                          controller.login();
+                          print('signup successfull');
+                          print(controller.googleAccount.value?.email ?? '');
+                          String emailz =
+                              controller.googleAccount.value?.email ?? '';
+                          // String emailz='sachet.adhikari2019@vitstudent.ac.in';
+                          List isVitian = emailz.split('@');
+                          if (isVitian[1] == 'vitstudent.ac.in') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegistrationScreen(
+                                        email: emailz,
+                                      )),
+                            );
+                            controller.logout();
+                            print('logged out');
+                          } else {
+                            showAlert(context, 'Not VITian?',
+                                'Looks Like You are not VITian. To continue using the app, signup with your VIT mail!');
+                            controller.logout();
+                            print('logged out');
+                          }
+                        })
                   ],
                 ),
               ),

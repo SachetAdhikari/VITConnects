@@ -1,5 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
+import 'package:flutter/material.dart';
+import 'constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class Forms extends StatefulWidget {
   Forms({Key? key}) : super(key: key);
@@ -9,16 +16,39 @@ class Forms extends StatefulWidget {
 }
 
 class _FormsState extends State<Forms> {
+  late User loggedInUser;
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
-  final coursename = ['SE', 'ISAA', 'DSA'];
+  List<String> coursename = [];
+  //final datum = snapshot.data!.docs;
   String? course;
-  final coursecode = ['CSE3001', 'CSE4001', 'CSE5001'];
+  List<String> coursecode = [];
   String? coursec;
-  final facultyname = ['Sachet', 'Subham', 'OK'];
+  List<String> facultyname = [];
   String? faculty;
-  final slot = ['E1', 'G1', 'A1'];
+  List<String> slot = [];
   String? s;
   @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      } else {
+        print('no user found');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Widget _button(String textt, BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 60),
@@ -64,6 +94,32 @@ class _FormsState extends State<Forms> {
               children: <Widget>[
                 const SizedBox(
                   height: 20,
+                ),
+                StreamBuilder<QuerySnapshot>(
+                  stream: _firestore.collection('courses').snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.blueAccent,
+                        ),
+                      );
+                    }
+                    final courses = snapshot.data!.docs;
+                    for (var datum in courses) {
+                      final faculty1 = datum['faculty'];
+                      final coursecode1 = datum['id'];
+                      final coursename1 = datum['name'];
+                      facultyname = faculty1.keys.toList();
+                      coursecode.add(coursecode1);
+                      print(coursecode1);
+                      print(facultyname);
+                      print(coursename1);
+                      coursename.add(coursename1);
+                      //slot.add();
+                    }
+                    return Container();
+                  },
                 ),
                 const Text(
                   "Course Name",

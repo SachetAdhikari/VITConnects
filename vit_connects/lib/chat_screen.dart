@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -55,6 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
   //
   // }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             StreamBuilder<QuerySnapshot>(
-                stream: _firestore.collection('messages').snapshots(),
+                stream: _firestore.collection('messages').orderBy('time',descending: true).snapshots(),
                 builder: (context,snapshot){
                   if(!snapshot.hasData){
                     return const Center(
@@ -90,16 +92,18 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     );
                   }
-                    final messages = snapshot.data!.docs.reversed;
+                    // final messages = snapshot.data!.docs.reversed;
+                  final messages = snapshot.data!.docs;
                     List<MessageBubble> messageBubbles =[];
                     for (var message in messages){
                       // final messageText = message.data['text'];
                       final messageText = message['text'];
                       final messageSender = message['sender'];
+                      final sentTime = message['time'];
 
                       final currentUser = loggedInUser.email;
 
-                      final messageBubble = MessageBubble(sender: messageSender, text: messageText,
+                      final messageBubble = MessageBubble(sender: messageSender, text: messageText,time: sentTime.toDate(),
                       isMe: currentUser==messageSender);
                       messageBubbles.add(messageBubble);
                     }
@@ -129,12 +133,15 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      _firestore.collection('messages').add({
-                        'text':messageText,
-                        'sender':loggedInUser.email,
-                        'time':Timestamp.now(),
-                      });
-                      messageTextController.clear();
+                      if(messageText!=null){
+                        _firestore.collection('messages').add({
+                          'text':messageText,
+                          'sender':loggedInUser.email, //from firebase
+                          'time':DateTime.now(),
+                        });
+                        messageTextController.clear();
+                      }
+
                     },
                     child: const Text(
                       'Send',
@@ -152,12 +159,15 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class MessageBubble extends StatelessWidget {
-  const MessageBubble({required this.sender,required this.text, required this.isMe});
+  const MessageBubble({required this.sender,required this.text, required this.isMe, required this.time});
   final String sender;
   final String text;
+  final DateTime time;
   final bool isMe;
+
   @override
   Widget build(BuildContext context) {
+    final String datetime = convertDateTime(time);
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Column(
@@ -187,8 +197,21 @@ class MessageBubble extends StatelessWidget {
             ),
           ),
         ),
+          Text(datetime,
+            style: TextStyle(
+              fontSize: 10.0,
+              color: Colors.black54,
+            ),
+          ),
         ]  ,
       ),
     );
+  }
+
+  static String convertDateTime(DateTime d) {
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+      String dateTime = dateFormat.format(d);
+      return dateTime;
+
   }
 }

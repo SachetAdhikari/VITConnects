@@ -22,13 +22,25 @@ final Color cc = Color(0xFFC4C4C4);
 
 class _SignInPageState extends State<SignInPage> {
   @override
-  // void initState() {
-  //   super.initState();
-  //   Firebase.initializeApp().whenComplete(() {
-  //     print("firebase initialization completed");
-  //     setState(() {});
-  //   });
-  // }
+  void showAlert(BuildContext context,String title,String content){
+    print('Alert');
+    var alertDialogue = AlertDialog(
+      title: Text(title),
+      content: Text(content),
+      actions:[
+        // FloatingActionButton(onPressed: onPressed)Action(child: Text('Ok'),),
+        FlatButton(child: Text('Ok'),onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()),); },
+
+        )
+      ],
+      elevation: 24.0,
+    );
+    showDialog(context: context,
+      builder:(_)=>alertDialogue,
+      barrierDismissible: false,
+    );
+  }
 
   final controller = Get.put(SignupController());
 
@@ -244,12 +256,13 @@ class _SignInPageState extends State<SignInPage> {
                           print('logged out');
                         }
                         else{
-                          showAlert(context);
-                          controller.logout();
-                          print('logged out');
+                                  showAlert(context, 'Not VITian?',
+                                      'Looks Like You are not VITian. To continue using the app, signup with your VIT mail!');
+                                  controller.logout();
+                                  print('logged out');
                         }
 
-                      },
+                        }
                     )
                   ],
                 ),
@@ -258,25 +271,6 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ),
       ),
-    );
-  }
-  void showAlert(BuildContext context){
-    print('Alert');
-    var alertDialogue = AlertDialog(
-      title: Text('Not VITIan?'),
-      content: Text('Looks Like You are not VITian. To continue using the app, signup with your VIT mail!'),
-      actions:[
-        // FloatingActionButton(onPressed: onPressed)Action(child: Text('Ok'),),
-        FlatButton(child: Text('Ok'),onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()),);; },
-
-        )
-      ],
-      elevation: 24.0,
-    );
-    showDialog(context: context,
-        builder:(_)=>alertDialogue,
-      barrierDismissible: false,
     );
   }
 }

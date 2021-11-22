@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "740385812092-kdl0tqs9rbuvm0g8rmrp1nt5r6c0f360.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vit_connects",
+            "certificate_hash": "023c9767b3838203d15cb3b1a6486b0a6d44eb24"
+          }
+        },
+        {
           "client_id": "740385812092-v47ur153njfnnc2hjda1nc2gpjk2bsm4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "740385812092-v47ur153njfnnc2hjda1nc2gpjk2bsm4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "740385812092-p3bljsl03ur7o16vjhn1c6qeei439r83.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.vitConnects"
+              }
             }
           ]
         }

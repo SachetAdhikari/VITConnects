@@ -1,4 +1,4 @@
-f<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -41,7 +41,9 @@ f<?xml version="1.0" encoding="UTF-8"?>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CFBundleURLTypes</key>
+	<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
+    <!-- Google Sign-in Section -->
+    <key>CFBundleURLTypes</key>
     <array>
     	<dict>
     		<key>CFBundleTypeRole</key>
@@ -54,5 +56,6 @@ f<?xml version="1.0" encoding="UTF-8"?>
     		</array>
     	</dict>
     </array>
+    <!-- End of the Google Sign-in Section -->
 </dict>
 </plist>

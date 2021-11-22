@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "740385812092",
+    "project_id": "vitconnects",
+    "storage_bucket": "vitconnects.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740385812092:android:c5e306f6da6340557963f9",
+        "android_client_info": {
+          "package_name": "com.example.vit_connects"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740385812092-v47ur153njfnnc2hjda1nc2gpjk2bsm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMIqpO6_zGcpBz2dmZ-EkigWy2C6uMCJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740385812092-v47ur153njfnnc2hjda1nc2gpjk2bsm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

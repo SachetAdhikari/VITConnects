@@ -6,6 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vit_connects/registration_screen.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:get/get.dart';
+import 'package:vit_connects/signup_controller.dart';
 
 import 'chat_screen.dart';
 
@@ -26,6 +29,8 @@ class _SignInPageState extends State<SignInPage> {
   //     setState(() {});
   //   });
   // }
+
+  final controller = Get.put(SignupController());
 
   final _auth = FirebaseAuth.instance;
 
@@ -226,8 +231,24 @@ class _SignInPageState extends State<SignInPage> {
                         color: Colors.red,
                       ),
                       label: Text('Sign Up With Google'),
-                      onPressed: () async {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen()),);
+                      onPressed: ()  {
+                        controller.login();
+                        print('signup successfull');
+                        print(controller.googleAccount.value?.email??'');
+                        String emailz= controller.googleAccount.value?.email??'';
+                        // String emailz='sachet.adhikari2019@vitstudent.ac.in';
+                        List isVitian = emailz.split('@');
+                        if(isVitian[1]=='vitstudent.ac.in'){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen(email: emailz,)),);
+                          controller.logout();
+                          print('logged out');
+                        }
+                        else{
+                          showAlert(context);
+                          controller.logout();
+                          print('logged out');
+                        }
+
                       },
                     )
                   ],
@@ -237,6 +258,25 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ),
       ),
+    );
+  }
+  void showAlert(BuildContext context){
+    print('Alert');
+    var alertDialogue = AlertDialog(
+      title: Text('Not VITIan?'),
+      content: Text('Looks Like You are not VITian. To continue using the app, signup with your VIT mail!'),
+      actions:[
+        // FloatingActionButton(onPressed: onPressed)Action(child: Text('Ok'),),
+        FlatButton(child: Text('Ok'),onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()),);; },
+
+        )
+      ],
+      elevation: 24.0,
+    );
+    showDialog(context: context,
+        builder:(_)=>alertDialogue,
+      barrierDismissible: false,
     );
   }
 }

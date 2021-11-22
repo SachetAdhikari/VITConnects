@@ -7,7 +7,9 @@ import 'package:vit_connects/groups.dart';
 import 'chat_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  const RegistrationScreen({Key? key, required this.email}) : super(key: key);
+
+  final String email;
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -15,8 +17,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
-  String email='';
   String password='';
+  String cPassword='';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +32,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             TextField(
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
+              obscureText: true,
               onChanged: (value) {
-                email=value;
+                password=value;
               },
               decoration: const InputDecoration(
-                hintText: 'Enter your email',
+                hintText: 'Setup Password for Vitconnects App',
                 contentPadding:
                 EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
@@ -57,10 +60,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               textAlign: TextAlign.center,
               obscureText: true,
               onChanged: (value) {
-                password=value;
+                cPassword=value;
               },
               decoration: const InputDecoration(
-                hintText: 'Enter your password',
+                hintText: 'Confirm password',
                 contentPadding:
                 EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
@@ -87,17 +90,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () async{
-                    try {
-                      final newUser = await _auth
-                          .createUserWithEmailAndPassword(
-                          email: email, password: password);
-                      if(newUser!=null){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()),);
+                    if(password==cPassword){
+                      try {
+                        final newUser = await _auth
+                            .createUserWithEmailAndPassword(
+                            email: widget.email, password: password);
+                        if(newUser!=null){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()),);
+                        }
+                      }
+                      catch(e){
+                        print(e);
                       }
                     }
-                    catch(e){
-                      print(e);
+                    else{
+                      //raise error for password and cPassword mismatch
                     }
+
                     },
                   minWidth: 200.0,
                   height: 42.0,

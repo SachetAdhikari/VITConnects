@@ -204,7 +204,7 @@ class _SignInPageState extends State<SignInPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChatScreen()),
+                                      builder: (context) => GroupPage()),
                                 );
                               }
                             } catch (e) {

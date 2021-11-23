@@ -182,7 +182,7 @@ class GroupList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              coursename + "=>" + slot,
+              coursename + " " + slot,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),

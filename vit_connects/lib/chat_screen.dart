@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vit_connects/signinpage.dart';
 import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -70,6 +71,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
                 _auth.signOut();
                 Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInPage()),
+                );
                 print('user logged out');
               }),
         ],

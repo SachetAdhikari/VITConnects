@@ -2,10 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
-import 'constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
 class Forms extends StatefulWidget {
   Forms({Key? key}) : super(key: key);
@@ -15,19 +11,16 @@ class Forms extends StatefulWidget {
 }
 
 class _FormsState extends State<Forms> {
-  late User loggedInUser;
-  final _auth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
-  List<String> coursename = [];
-  //final datum = snapshot.data!.docs;
-  String? course;
-  List<String> coursecode = [];
-  String? coursec;
-  List<String> facultyname = [];
-  String? faculty;
-  List<String> slot = [];
-  String? s;
+  final _auth = FirebaseAuth.instance;
+  late User loggedInUser;
+  final _firestore = FirebaseFirestore.instance;
+  String coursename = '';
+  final courseController = TextEditingController();
+  final slotController = TextEditingController();
+  final facultyController = TextEditingController();
+  String faculty = '';
+  String slot = '';
   @override
   void initState() {
     super.initState();
@@ -48,13 +41,22 @@ class _FormsState extends State<Forms> {
     }
   }
 
-  Widget _button(String textt, BuildContext context) {
+  Widget _button(String textt, BuildContext context, String slot,
+      String coursename, String faculty) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 60),
       child: MaterialButton(
         elevation: 0,
         height: 60,
         onPressed: () {
+          if (coursename != null) {
+            _firestore.collection('user').add({
+              'course': coursename,
+              'email': loggedInUser.email, //from firebase
+              'faculty': faculty,
+              'slot': slot,
+            });
+          }
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Forms()),
@@ -89,36 +91,9 @@ class _FormsState extends State<Forms> {
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(
                   height: 20,
-                ),
-                StreamBuilder<QuerySnapshot>(
-                  stream: _firestore.collection('courses').snapshots(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.blueAccent,
-                        ),
-                      );
-                    }
-                    final courses = snapshot.data!.docs;
-                    for (var datum in courses) {
-                      final faculty1 = datum['faculty'];
-                      final coursecode1 = datum['id'];
-                      final coursename1 = datum['name'];
-                      facultyname = faculty1.keys.toList();
-                      coursecode.add(coursecode1);
-                      print(coursecode1);
-                      print(facultyname);
-                      print(coursename1);
-                      coursename.add(coursename1);
-                      //slot.add();
-                    }
-                    return Container();
-                  },
                 ),
                 const Text(
                   "Course Name",
@@ -127,24 +102,17 @@ class _FormsState extends State<Forms> {
                       //color: Colors.white,
                       ),
                 ),
-                Container(
-                  width: 400,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: course,
-                      isExpanded: true,
-                      iconSize: 36,
-                      icon: const Icon(Icons.arrow_drop_down,
-                          color: Colors.black),
-                      items: coursename.map(buildMenuItem).toList(),
-                      onChanged: (value) => setState(() => course = value),
-                    ),
-                  ),
+                TextField(
+                  // controller: messageController,
+                  //     onChanged: (value) {
+                  //       coursename = value;
+                  //     },
+                  decoration: const InputDecoration(
+                      hintText: 'Course Name',
+                      hintStyle:
+                          TextStyle(fontFamily: 'ProximaNova', fontSize: 17)
+                      //labelText: 'Course Name',
+                      ),
                 ),
                 const SizedBox(
                   height: 20,
@@ -157,21 +125,17 @@ class _FormsState extends State<Forms> {
                       //color: Colors.white,
                       ),
                 ),
-                Container(
-                  width: 400,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: coursec,
-                      isExpanded: true,
-                      iconSize: 36,
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                      items: coursecode.map(buildMenuItem).toList(),
-                      onChanged: (value) => setState(() => coursec = value),
-                    ),
+                TextField(
+                  controller: courseController,
+                  onChanged: (value) {
+                    coursename = value;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: 'Course Code',
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                        //color: Colors.white,
+                        ),
+                    //labelText: 'Course Code',
                   ),
                 ),
                 const SizedBox(
@@ -184,21 +148,17 @@ class _FormsState extends State<Forms> {
                       //color: Colors.white,
                       ),
                 ),
-                Container(
-                  width: 400,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: s,
-                      isExpanded: true,
-                      iconSize: 36,
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                      items: slot.map(buildMenuItem).toList(),
-                      onChanged: (value) => setState(() => s = value),
-                    ),
+                TextField(
+                  controller: slotController,
+                  onChanged: (value) {
+                    slot = value;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: 'Slot',
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                        //color: Colors.white,
+                        ),
+                    //labelText: 'Course',
                   ),
                 ),
                 const SizedBox(
@@ -211,27 +171,23 @@ class _FormsState extends State<Forms> {
                       //color: Colors.white,
                       ),
                 ),
-                Container(
-                  width: 400,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 4),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: course,
-                      isExpanded: true,
-                      iconSize: 36,
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                      items: facultyname.map(buildMenuItem).toList(),
-                      onChanged: (value) => setState(() => faculty = value),
-                    ),
+                TextField(
+                  controller: facultyController,
+                  onChanged: (value) {
+                    faculty = value;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: 'Name',
+                    hintStyle: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                        //color: Colors.white,
+                        ),
+                    //labelText: 'Course',
                   ),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
-                _button("Join", context),
+                _button("Join", context, coursename, slot, faculty),
               ],
             ),
           ),
@@ -239,12 +195,4 @@ class _FormsState extends State<Forms> {
       ),
     );
   }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-      );
 }

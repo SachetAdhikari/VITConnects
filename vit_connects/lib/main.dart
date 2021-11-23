@@ -40,7 +40,7 @@ class VitConnects extends StatelessWidget {
             '/signinpage': (_) => SignInPage(),
             '/groups': (_) => GroupPage(),
             './join': (_) => Forms(),
-            '/chat': (_) => ChatScreen(),
+            //'/chat': (_) => ChatScreen(),
           },
         );
       },

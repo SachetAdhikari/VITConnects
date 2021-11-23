@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:draggable_fab/draggable_fab.dart';
@@ -17,7 +19,11 @@ class GroupPage extends StatefulWidget {
 class _GroupPageState extends State<GroupPage> {
   //FloatingActionButtonLocation _fabLocation =
   //FloatingActionButtonLocation.centerFloat;
-  Widget _button(String textt, BuildContext context) {
+  final _auth = FirebaseAuth.instance;
+  late User loggedInUser;
+
+  final _firestore = FirebaseFirestore.instance;
+  Widget _button(String textt, BuildContext context, String coursename) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 60),
       child: MaterialButton(
@@ -26,7 +32,8 @@ class _GroupPageState extends State<GroupPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ChatScreen()),
+            MaterialPageRoute(
+                builder: (context) => ChatScreen(course: coursename)),
           );
         },
         color: buttonc,
@@ -46,20 +53,28 @@ class _GroupPageState extends State<GroupPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      } else {
+        print('no user found');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: bg,
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        // floatingActionButton: SizedBox(
-        //   height: 100,
-        //   width: 100,
-        //   child: FloatingActionButton(
-        //     child: Icon(Icons.add),
-        //     shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-        //     onPressed: () {},
-        //   ),
-        // ),
-
         floatingActionButton: DraggableFab(
           child: FloatingActionButton(
             backgroundColor: buttonc,
@@ -87,11 +102,94 @@ class _GroupPageState extends State<GroupPage> {
         body: Center(
           child: Column(
             children: <Widget>[
-              _button('Chat', context),
+              StreamBuilder<QuerySnapshot>(
+                stream: _firestore.collection('user').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.blueAccent,
+                      ),
+                    );
+                  }
+                  // final messages = snapshot.data!.docs.reversed;
+                  final user_details = snapshot.data!.docs;
+                  List<GroupList> groups = [];
+                  for (var message in user_details) {
+                    // final messageText = message.data['text'];
+                    final email = message['email'];
+                    if (email == loggedInUser.email) {
+                      final course = message['course'];
+                      final faculty = message['faculty'];
+                      final slot = message['slot'];
+                      final user_detailss =
+                          GroupList(coursename: course, slot: slot);
+                      groups.add(user_detailss);
+                    }
+                    //final messageSender = message[''];
+                    //final sentTime = message['time'];
+
+                    //final currentUser = loggedInUser.email;
+                    // final messageBubble = MessageBubble(
+                    //     sender: messageSender,
+                    //     text: messageText,
+                    //     time: sentTime.toDate(),
+                    //     isMe: currentUser == messageSender);
+                    // messageBubbles.add(messageBubble);
+                  }
+                  return Expanded(
+                    child: ListView(
+                      //reverse: true,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
+                      children: groups,
+                    ),
+                  );
+
+                  return Container();
+                },
+              ),
             ],
           ),
         )
         //floatingActionButton: FloatingActionButtonLocation.centerFloat,
         );
+  }
+}
+
+class GroupList extends StatelessWidget {
+  const GroupList({Key? key, required this.coursename, required this.slot})
+      : super(key: key);
+  final String coursename;
+  final String slot;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 60),
+      child: MaterialButton(
+        elevation: 0,
+        height: 80,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ChatScreen(course: coursename)),
+          );
+        },
+        color: buttonc,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              coursename + "=>" + slot,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

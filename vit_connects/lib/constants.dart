@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const kSendButtonTextStyle = TextStyle(
-  color: Colors.lightBlueAccent,
+  color: Colors.red,
   fontWeight: FontWeight.bold,
   fontSize: 18.0,
 );

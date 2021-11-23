@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vit_connects/chat_screen.dart';
+import 'package:vit_connects/profile.dart';
 import 'package:vit_connects/signinpage.dart';
 import './landingpage.dart';
 import './form.dart';

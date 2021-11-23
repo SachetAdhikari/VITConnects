@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vit_connects/profile.dart';
 import './main.dart';
 
 class SideMenu extends StatelessWidget {
@@ -33,7 +34,13 @@ class SideMenu extends StatelessWidget {
               ),
               title: const Text('Profile',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
-              onTap: () => {Navigator.of(context).pop()}),
+              onTap: () => {
+                    //Navigator.of(context).pop()
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Profile()),
+                    ),
+                  }),
           ListTile(
               leading: const Icon(
                 Icons.settings,

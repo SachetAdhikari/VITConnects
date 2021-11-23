@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:draggable_fab/draggable_fab.dart';
+import 'package:vit_connects/chat_screen.dart';
 import './main.dart';
 import './form.dart';
 import './sidemenu.dart';
@@ -16,45 +17,81 @@ class GroupPage extends StatefulWidget {
 class _GroupPageState extends State<GroupPage> {
   //FloatingActionButtonLocation _fabLocation =
   //FloatingActionButtonLocation.centerFloat;
+  Widget _button(String textt, BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 60),
+      child: MaterialButton(
+        elevation: 0,
+        height: 80,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatScreen()),
+          );
+        },
+        color: buttonc,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              textt,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bg,
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: SizedBox(
-      //   height: 100,
-      //   width: 100,
-      //   child: FloatingActionButton(
-      //     child: Icon(Icons.add),
-      //     shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-      //     onPressed: () {},
-      //   ),
-      // ),
-      floatingActionButton: DraggableFab(
-        child: FloatingActionButton(
-          backgroundColor: buttonc,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Forms()),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
-      ),
-      drawer: Drawer(child: SideMenu()),
-      appBar: AppBar(
-        backgroundColor: pc,
-        title:
-            const Text("Groups", style: TextStyle(fontFamily: 'ProximaNova')),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.list_outlined,
+        backgroundColor: bg,
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // floatingActionButton: SizedBox(
+        //   height: 100,
+        //   width: 100,
+        //   child: FloatingActionButton(
+        //     child: Icon(Icons.add),
+        //     shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+        //     onPressed: () {},
+        //   ),
+        // ),
+
+        floatingActionButton: DraggableFab(
+          child: FloatingActionButton(
+            backgroundColor: buttonc,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Forms()),
+              );
+            },
+            child: const Icon(Icons.add),
           ),
-          onPressed: () {},
         ),
-      ),
-      //floatingActionButton: FloatingActionButtonLocation.centerFloat,
-    );
+        drawer: Drawer(child: SideMenu()),
+        appBar: AppBar(
+          backgroundColor: pc,
+          title:
+              const Text("Groups", style: TextStyle(fontFamily: 'ProximaNova')),
+          leading: IconButton(
+            icon: const Icon(
+              Icons.list_outlined,
+            ),
+            onPressed: () {},
+          ),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              _button('Chat', context),
+            ],
+          ),
+        )
+        //floatingActionButton: FloatingActionButtonLocation.centerFloat,
+        );
   }
 }

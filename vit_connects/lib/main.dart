@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vit_connects/chat_screen.dart';
 import 'package:vit_connects/signinpage.dart';
 import './landingpage.dart';
 import './form.dart';
@@ -39,6 +40,7 @@ class VitConnects extends StatelessWidget {
             '/signinpage': (_) => SignInPage(),
             '/groups': (_) => GroupPage(),
             './join': (_) => Forms(),
+            '/chat': (_) => ChatScreen(),
           },
         );
       },

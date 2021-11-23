@@ -5,25 +5,27 @@ import './form.dart';
 
 class LandingPage extends StatelessWidget {
   Widget _button(String textt, BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 60),
-      child: MaterialButton(
-        elevation: 0,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SignInPage()),
+        );
+      },
+      child: Container(
         height: 80,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SignInPage()),
-          );
-        },
-        color: buttonc,
+        decoration: BoxDecoration(
+            color: buttonc,
+            border: Border.all(),
+            borderRadius: const BorderRadius.all(Radius.circular(15))),
+        margin: const EdgeInsets.symmetric(horizontal: 60),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               textt,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),
             ),
           ],
@@ -34,18 +36,18 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bg,
       body: Column(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.6265,
-            margin: EdgeInsets.fromLTRB(
-                0, MediaQuery.of(context).size.height * 0.3735, 0, 0),
+            width: size.width,
+            height: size.height * 0.6265,
+            margin: EdgeInsets.fromLTRB(0, size.height * 0.3735, 0, 0),
             decoration: BoxDecoration(
               color: pc,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(60),
                 topRight: Radius.circular(60),
               ),
@@ -55,18 +57,49 @@ class LandingPage extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(25, 0, 0, 0),
-                    child: Text(
-                      "\nWELCOME\nTO\nVIT CONNECT's",
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                    margin: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 50.0),
+                        child: Column(
+                          children: const [
+                            Text(
+                              "WELCOME",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "TO",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "VIT CONNECT's",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 100),
+                const SizedBox(height: 100),
                 _button("GET STARTED", context),
               ],
             ),

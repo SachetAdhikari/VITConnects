@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
-import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -130,7 +129,8 @@ class _FormsState extends State<Forms> {
                 ),
                 Container(
                   width: 400,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 4),
                   ),
@@ -139,7 +139,8 @@ class _FormsState extends State<Forms> {
                       value: course,
                       isExpanded: true,
                       iconSize: 36,
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+                      icon: const Icon(Icons.arrow_drop_down,
+                          color: Colors.black),
                       items: coursename.map(buildMenuItem).toList(),
                       onChanged: (value) => setState(() => course = value),
                     ),

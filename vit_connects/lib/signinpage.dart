@@ -95,197 +95,221 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: bg,
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 70, bottom: 130, left: 35),
-            child: Container(
-              width: MediaQuery.of(context).size.width - 70,
-              height: MediaQuery.of(context).size.height - 30,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.white),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(63.0),
-                  topRight: Radius.circular(63.0),
-                  bottomLeft: Radius.circular(63.0),
-                  bottomRight: Radius.circular(63.0),
+      backgroundColor: Colors.red,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(height: size.height * 0.13),
+              Container(
+                width: MediaQuery.of(context).size.width - 70,
+                height: MediaQuery.of(context).size.height * 0.70,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.white),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(50.0),
+                    topRight: Radius.circular(50.0),
+                    bottomLeft: Radius.circular(50.0),
+                    bottomRight: Radius.circular(50.0),
+                  ),
                 ),
-              ),
-              child: Column(children: <Widget>[
-                const SizedBox(height: 30),
-                const Text(
-                  'Log In',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.only(right: 150, top: 10),
-                        child: Text(
-                          'Username',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            right: 25.0, left: 25.0, bottom: 20.0, top: 5.0),
-                        child: TextFormField(
-                          //validator: (val) => val.isEmpty ? 'Enter an Email' : null,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            //labelText: 'Username',
-                            hintText: 'Username',
-                            //fillColor: cc,
-                            //hoverColor: cc,
-                            //focusColor: cc,
+                child: Column(children: <Widget>[
+                  const SizedBox(height: 30),
+                  const Text(
+                    'Login',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40.0,
+                        fontFamily: 'ProximaNova',
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(right: 150, top: 10),
+                          child: Text(
+                            'Username',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.start,
                           ),
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.emailAddress,
-                          onChanged: (value) {
-                            setState(() => email = value);
-                          },
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 150),
-                        child: Text(
-                          'Password',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.start,
+
+                        const SizedBox(
+                          height: 5,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            right: 25.0, left: 25.0, bottom: 30.0, top: 5.0),
-                        child: TextFormField(
-                          //validator: (val) =>
-                          //  val.length < 8 ? 'Passcode must be 6+' : null,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            //labelText: 'Password',
-                            hintText: 'Password',
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              right: 25.0, left: 25.0, bottom: 20.0, top: 5.0),
+                          child: TextFormField(
+                            //validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+
+                              //labelText: 'Username',
+                              hintText: 'Username',
+                              //fillColor: cc,
+                              //hoverColor: cc,
+                              //focusColor: cc,
+                            ),
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: (value) {
+                              setState(() => email = value);
+                            },
                           ),
-                          textAlign: TextAlign.center,
-                          onChanged: (value) {
-                            setState(() => password = value);
-                          },
                         ),
-                      ),
-                      Material(
-                        color: Colors.black87,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30.0)),
-                        elevation: 5.0,
-                        child: MaterialButton(
-                          onPressed: () async {
-                            try {
-                              final user =
-                                  await _auth.signInWithEmailAndPassword(
-                                      email: email, password: password);
-                              if (user != null) {
+                        const Padding(
+                          padding: EdgeInsets.only(right: 150),
+                          child: Text(
+                            'Password',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              right: 25.0, left: 25.0, bottom: 30.0, top: 5.0),
+                          child: TextFormField(
+                            //validator: (val) =>
+                            //  val.length < 8 ? 'Passcode must be 6+' : null,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              //labelText: 'Password',
+                              hintText: 'Password',
+                            ),
+                            textAlign: TextAlign.center,
+                            onChanged: (value) {
+                              setState(() => password = value);
+                            },
+                          ),
+                        ),
+                        Material(
+                          color: Colors.red,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30.0)),
+                          elevation: 5.0,
+                          child: MaterialButton(
+                            onPressed: () async {
+                              try {
+                                final user =
+                                    await _auth.signInWithEmailAndPassword(
+                                        email: email, password: password);
+                                if (user != null) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => GroupPage()),
+                                  );
+                                }
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            minWidth: 250.0,
+                            height: 60.0,
+                            child: const Text('Login',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                    fontFamily: "ProximaNova",
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        ),
+                        // ElevatedButton.icon(
+                        //   style: ElevatedButton.styleFrom(
+                        //     primary: pc,
+                        //     onPrimary: Colors.white,
+                        //     minimumSize: Size(250, 60),
+                        //     shape: RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.circular(30),
+                        //     ),
+                        //   ),
+                        //   icon: const FaIcon(
+                        //     FontAwesomeIcons.google,
+                        //     color: Colors.red,
+                        //   ),
+                        //   label: Text('Login'),
+                        //   onPressed: () {
+                        //     print(email);
+                        //     print(password);
+                        //
+                        //   },
+                        // ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                              onPrimary: Colors.white,
+                              minimumSize: Size(250, 60),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            icon: const FaIcon(
+                              FontAwesomeIcons.google,
+                              color: Colors.white,
+                            ),
+                            label: const Text('Sign Up With Google',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: "ProximaNova",
+                                    fontWeight: FontWeight.w600)),
+                            onPressed: () {
+                              controller.login();
+                              print('signup successfull');
+                              print(
+                                  controller.googleAccount.value?.email ?? '');
+                              String emailz =
+                                  controller.googleAccount.value?.email ?? '';
+                              // String emailz='sachet.adhikari2019@vitstudent.ac.in';
+                              List isVitian = emailz.split('@');
+                              if (isVitian[1] == 'vitstudent.ac.in') {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => GroupPage()),
+                                      builder: (context) => RegistrationScreen(
+                                            email: emailz,
+                                          )),
                                 );
+                                controller.logout();
+                                print('logged out');
+                              } else {
+                                showAlert(context, 'Not VITian?',
+                                    'Looks Like You are not VITian. To continue using the app, signup with your VIT mail!');
+                                controller.logout();
+                                print('logged out');
                               }
-                            } catch (e) {
-                              print(e);
-                            }
-                          },
-                          minWidth: 200.0,
-                          height: 42.0,
-                          child: const Text(
-                            'Login',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      // ElevatedButton.icon(
-                      //   style: ElevatedButton.styleFrom(
-                      //     primary: pc,
-                      //     onPrimary: Colors.white,
-                      //     minimumSize: Size(250, 60),
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.circular(30),
-                      //     ),
-                      //   ),
-                      //   icon: const FaIcon(
-                      //     FontAwesomeIcons.google,
-                      //     color: Colors.red,
-                      //   ),
-                      //   label: Text('Login'),
-                      //   onPressed: () {
-                      //     print(email);
-                      //     print(password);
-                      //
-                      //   },
-                      // ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            primary: pc,
-                            onPrimary: Colors.white,
-                            minimumSize: Size(250, 60),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          icon: const FaIcon(
-                            FontAwesomeIcons.google,
-                            color: Colors.red,
-                          ),
-                          label: const Text('Sign Up With Google'),
-                          onPressed: () {
-                            controller.login();
-                            print('signup successfull');
-                            print(controller.googleAccount.value?.email ?? '');
-                            String emailz =
-                                controller.googleAccount.value?.email ?? '';
-                            // String emailz='sachet.adhikari2019@vitstudent.ac.in';
-                            List isVitian = emailz.split('@');
-                            if (isVitian[1] == 'vitstudent.ac.in') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegistrationScreen(
-                                          email: emailz,
-                                        )),
-                              );
-                              controller.logout();
-                              print('logged out');
-                            } else {
-                              showAlert(context, 'Not VITian?',
-                                  'Looks Like You are not VITian. To continue using the app, signup with your VIT mail!');
-                              controller.logout();
-                              print('logged out');
-                            }
-                          })
-                    ],
+                            })
+                      ],
+                    ),
                   ),
-                ),
-              ]),
-            ),
+                ]),
+              ),
+            ],
           ),
         ),
       ),

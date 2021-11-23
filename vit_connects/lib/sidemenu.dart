@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
 
@@ -10,32 +11,42 @@ class SideMenu extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: const Center(
-              child: const Text(
-                'Welcome!!!',
+          const DrawerHeader(
+            child: Center(
+              child: Text(
+                'VIT Connects',
                 style: TextStyle(
                     fontSize: 32,
+                    fontWeight: FontWeight.bold,
                     color: Colors.white,
                     fontFamily: 'ProximaNova'),
               ),
             ),
             decoration: BoxDecoration(
-              color: pc,
+              color: Colors.red,
             ),
           ),
           ListTile(
-              leading: const Icon(Icons.verified_user),
+              leading: const Icon(
+                Icons.verified_user,
+                color: Colors.red,
+              ),
               title: const Text('Profile',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {Navigator.of(context).pop()}),
           ListTile(
-              leading: const Icon(Icons.settings),
+              leading: const Icon(
+                Icons.settings,
+                color: Colors.red,
+              ),
               title: const Text('Settings',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {Navigator.of(context).pop()}),
           ListTile(
-              leading: const Icon(Icons.exit_to_app),
+              leading: const Icon(
+                Icons.exit_to_app,
+                color: Colors.red,
+              ),
               title: const Text('Log Out',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {Navigator.of(context).pop()}),

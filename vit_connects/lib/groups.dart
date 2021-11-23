@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:draggable_fab/draggable_fab.dart';
+import 'package:flutter/painting.dart';
 import 'package:vit_connects/chat_screen.dart';
 import './main.dart';
 import './form.dart';
@@ -73,11 +74,13 @@ class _GroupPageState extends State<GroupPage> {
   }
 
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+        key: _scaffoldKey,
         backgroundColor: bg,
         floatingActionButton: DraggableFab(
           child: FloatingActionButton(
-            backgroundColor: buttonc,
+            backgroundColor: Colors.red,
             onPressed: () {
               Navigator.push(
                 context,
@@ -89,14 +92,15 @@ class _GroupPageState extends State<GroupPage> {
         ),
         drawer: Drawer(child: SideMenu()),
         appBar: AppBar(
-          backgroundColor: pc,
-          title:
-              const Text("Groups", style: TextStyle(fontFamily: 'ProximaNova')),
+          backgroundColor: Colors.red,
+          title: const Text("Groups",
+              style: TextStyle(
+                  fontFamily: 'ProximaNova', fontWeight: FontWeight.bold)),
           leading: IconButton(
             icon: const Icon(
-              Icons.list_outlined,
+              Icons.menu,
             ),
-            onPressed: () {},
+            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
           ),
         ),
         body: Center(

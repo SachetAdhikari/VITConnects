@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
 
@@ -43,26 +44,28 @@ class _FormsState extends State<Forms> {
 
   Widget _button(String textt, BuildContext context, String slot,
       String coursename, String faculty) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 60),
-      child: MaterialButton(
-        elevation: 0,
+    return GestureDetector(
+      onTap: () {
+        if (coursename != null) {
+          _firestore.collection('user').add({
+            'course': coursename,
+            'email': loggedInUser.email, //from firebase
+            'faculty': faculty,
+            'slot': slot,
+          });
+        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Forms()),
+        );
+      },
+      child: Container(
         height: 60,
-        onPressed: () {
-          if (coursename != null) {
-            _firestore.collection('user').add({
-              'course': coursename,
-              'email': loggedInUser.email, //from firebase
-              'faculty': faculty,
-              'slot': slot,
-            });
-          }
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Forms()),
-          );
-        },
-        color: bc,
+        margin: const EdgeInsets.symmetric(horizontal: 60),
+        decoration: BoxDecoration(
+            color: Colors.red,
+            border: Border.all(color: Colors.red),
+            borderRadius: const BorderRadius.all(Radius.circular(30))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -79,116 +82,126 @@ class _FormsState extends State<Forms> {
   }
 
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("VIT CONNECT's",
-            style: TextStyle(fontFamily: 'ProximaNova')),
-        backgroundColor: pc,
+            style: TextStyle(
+                fontFamily: 'ProximaNova', fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.red,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Course Name",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                      //color: Colors.white,
-                      ),
-                ),
-                TextField(
-                  // controller: messageController,
-                  //     onChanged: (value) {
-                  //       coursename = value;
-                  //     },
-                  decoration: const InputDecoration(
-                      hintText: 'Course Name',
-                      hintStyle:
-                          TextStyle(fontFamily: 'ProximaNova', fontSize: 17)
-                      //labelText: 'Course Name',
-                      ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Course Code",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: size.height * 0.10,
+                    ),
+                    const Text(
+                      "Course Name",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                          //color: Colors.white,
+                          ),
+                    ),
+                    const TextField(
+                      // controller: messageController,
+                      //     onChanged: (value) {
+                      //       coursename = value;
+                      //     },
+                      decoration: InputDecoration(
+                          hintText: 'Course Name',
+                          hintStyle:
+                              TextStyle(fontFamily: 'ProximaNova', fontSize: 17)
+                          //labelText: 'Course Name',
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Course Code",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
 
-                      //color: Colors.white,
+                          //color: Colors.white,
+                          ),
+                    ),
+                    TextField(
+                      controller: courseController,
+                      onChanged: (value) {
+                        coursename = value;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Course Code',
+                        hintStyle:
+                            TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                                //color: Colors.white,
+                                ),
+                        //labelText: 'Course Code',
                       ),
-                ),
-                TextField(
-                  controller: courseController,
-                  onChanged: (value) {
-                    coursename = value;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: 'Course Code',
-                    hintStyle: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                        //color: Colors.white,
-                        ),
-                    //labelText: 'Course Code',
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Slot",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                      //color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Slot",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                          //color: Colors.white,
+                          ),
+                    ),
+                    TextField(
+                      controller: slotController,
+                      onChanged: (value) {
+                        slot = value;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Slot',
+                        hintStyle:
+                            TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                                //color: Colors.white,
+                                ),
+                        //labelText: 'Course',
                       ),
-                ),
-                TextField(
-                  controller: slotController,
-                  onChanged: (value) {
-                    slot = value;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: 'Slot',
-                    hintStyle: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                        //color: Colors.white,
-                        ),
-                    //labelText: 'Course',
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Faculty Name",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                      //color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Faculty Name",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                          //color: Colors.white,
+                          ),
+                    ),
+                    TextField(
+                      controller: facultyController,
+                      onChanged: (value) {
+                        faculty = value;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Name',
+                        hintStyle:
+                            TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+                                //color: Colors.white,
+                                ),
+                        //labelText: 'Course',
                       ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    _button("Join", context, coursename, slot, faculty),
+                  ],
                 ),
-                TextField(
-                  controller: facultyController,
-                  onChanged: (value) {
-                    faculty = value;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: 'Name',
-                    hintStyle: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                        //color: Colors.white,
-                        ),
-                    //labelText: 'Course',
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                _button("Join", context, coursename, slot, faculty),
-              ],
+              ),
             ),
           ),
         ),

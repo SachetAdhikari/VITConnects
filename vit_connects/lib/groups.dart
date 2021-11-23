@@ -25,7 +25,7 @@ class _GroupPageState extends State<GroupPage> {
   final _firestore = FirebaseFirestore.instance;
   Widget _button(String textt, BuildContext context, String coursename) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 60),
+      margin: const EdgeInsets.symmetric(horizontal: 60),
       child: MaterialButton(
         elevation: 0,
         height: 80,

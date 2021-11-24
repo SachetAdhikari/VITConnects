@@ -4,13 +4,9 @@ import 'package:vit_connects/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vit_connects/registration_screen.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:vit_connects/signup_controller.dart';
-
-import 'chat_screen.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -56,7 +52,7 @@ class _SignInPageState extends State<SignInPage> {
   String email = '';
   String password = '';
   String error = '';
-  Widget _button(String textt) {
+  Widget _button(String text) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 60),
       child: MaterialButton(
@@ -82,7 +78,7 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              textt,
+              text,
               textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),

@@ -101,7 +101,7 @@ class _FormsState extends State<Forms> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      height: size.height * 0.10,
+                      height: size.height * 0.03,
                     ),
                     const Text(
                       "Course Name",
@@ -110,17 +110,22 @@ class _FormsState extends State<Forms> {
                           //color: Colors.white,
                           ),
                     ),
-                    const TextField(
-                      // controller: messageController,
-                      //     onChanged: (value) {
-                      //       coursename = value;
-                      //     },
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      //validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+
                       decoration: InputDecoration(
-                          hintText: 'Course Name',
-                          hintStyle:
-                              TextStyle(fontFamily: 'ProximaNova', fontSize: 17)
-                          //labelText: 'Course Name',
-                          ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+
+                        //labelText: 'Username',
+                        hintText: 'Course Name',
+                      ),
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 20,
@@ -133,19 +138,20 @@ class _FormsState extends State<Forms> {
                           //color: Colors.white,
                           ),
                     ),
-                    TextField(
-                      controller: courseController,
-                      onChanged: (value) {
-                        coursename = value;
-                      },
-                      decoration: const InputDecoration(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      //validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         hintText: 'Course Code',
-                        hintStyle:
-                            TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                                //color: Colors.white,
-                                ),
-                        //labelText: 'Course Code',
                       ),
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 20,
@@ -157,19 +163,20 @@ class _FormsState extends State<Forms> {
                           //color: Colors.white,
                           ),
                     ),
-                    TextField(
-                      controller: slotController,
-                      onChanged: (value) {
-                        slot = value;
-                      },
-                      decoration: const InputDecoration(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      //validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         hintText: 'Slot',
-                        hintStyle:
-                            TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                                //color: Colors.white,
-                                ),
-                        //labelText: 'Course',
                       ),
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 20,
@@ -181,19 +188,20 @@ class _FormsState extends State<Forms> {
                           //color: Colors.white,
                           ),
                     ),
-                    TextField(
-                      controller: facultyController,
-                      onChanged: (value) {
-                        faculty = value;
-                      },
-                      decoration: const InputDecoration(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      //validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         hintText: 'Name',
-                        hintStyle:
-                            TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                                //color: Colors.white,
-                                ),
-                        //labelText: 'Course',
                       ),
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 40,

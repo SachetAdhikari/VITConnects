@@ -13,10 +13,12 @@ class LandingPage extends StatelessWidget {
         );
       },
       child: Container(
-        height: 80,
+        height: 60,
         decoration: BoxDecoration(
-            color: buttonc,
-            border: Border.all(),
+            color: Colors.white,
+            border: Border.all(
+              color: Colors.red,
+            ),
             borderRadius: const BorderRadius.all(Radius.circular(15))),
         margin: const EdgeInsets.symmetric(horizontal: 60),
         child: Row(
@@ -26,7 +28,7 @@ class LandingPage extends StatelessWidget {
               textt,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),
+                  fontSize: 20, color: Colors.red, fontFamily: 'ProximaNova'),
             ),
           ],
         ),
@@ -38,72 +40,59 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: Colors.red,
       body: Column(
         children: [
           Container(
-            width: size.width,
-            height: size.height * 0.6265,
-            margin: EdgeInsets.fromLTRB(0, size.height * 0.3735, 0, 0),
-            decoration: BoxDecoration(
-              color: pc,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(60),
-                topRight: Radius.circular(60),
-              ),
-            ),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 50.0),
-                        child: Column(
-                          children: const [
-                            Text(
-                              "WELCOME",
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "TO",
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "VIT CONNECT's",
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+            height: size.height * 0.30,
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Column(
+                    children: const [
+                      Text(
+                        "WELCOME",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: "ProximaNova"),
                       ),
-                    ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "TO",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: "ProximaNova"),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "VIT CONNECT's",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: "ProximaNova"),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 100),
-                _button("GET STARTED", context),
-              ],
+              ),
             ),
           ),
+          const SizedBox(height: 100),
+          _button("GET STARTED", context),
         ],
       ),
     );

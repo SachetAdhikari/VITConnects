@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vit_connects/chat_screen.dart';
+import 'package:vit_connects/profile.dart';
 import 'package:vit_connects/signinpage.dart';
 import './landingpage.dart';
 import './form.dart';
@@ -11,10 +12,10 @@ void main() {
   runApp(VitConnects());
 }
 
-final Color bg = Color(0xffA49F9F);
-final Color pc = Color(0xff100202);
-final Color buttonc = Color(0xff2EF31D);
-final Color bc = Color.fromARGB(255, 103, 137, 131);
+const Color bg = Color(0xffA49F9F);
+const Color pc = Color(0xff100202);
+const Color buttonc = Color(0xff2EF31D);
+const Color bc = Color.fromARGB(255, 103, 137, 131);
 
 class VitConnects extends StatelessWidget {
   @override

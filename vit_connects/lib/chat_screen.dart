@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
               }),
         ],
         title: const Text('️Chat'),
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.red,
       ),
       body: SafeArea(
         child: Column(
@@ -184,14 +184,14 @@ class MessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final String datetime = convertDateTime(time);
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             sender,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12.0,
               color: Colors.black54,
             ),
@@ -199,17 +199,18 @@ class MessageBubble extends StatelessWidget {
           Material(
             elevation: 5.0,
             borderRadius: isMe
-                ? BorderRadius.only(
+                ? const BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0))
-                : BorderRadius.only(
+                : const BorderRadius.only(
                     topRight: Radius.circular(30.0),
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0)),
             color: isMe ? Colors.lightBlue : Colors.white,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Text(
                 '$text',
                 style: TextStyle(

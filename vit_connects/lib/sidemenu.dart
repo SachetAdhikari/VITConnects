@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vit_connects/profile.dart';
 import 'package:vit_connects/groups.dart';
+import 'package:vit_connects/signinpage.dart';
 import './main.dart';
 
 class SideMenu extends StatelessWidget {
   //const SideMenu({ Key? key }) : super(key: key);
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +81,17 @@ class SideMenu extends StatelessWidget {
               ),
               title: const Text('Log Out',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
-              onTap: () => {Navigator.of(context).pop()}),
-        ],
+              onTap: (){
+
+    _auth.signOut();
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SignInPage()),
+    );
+    print('user logged out');
+                }
+          )],
       ),
     );
   }

@@ -45,18 +45,4 @@ class VitConnects extends StatelessWidget {
       },
     );
   }
-
-  // Widgetet build(BuildContext context) {
-  //   return MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     title: "VIT CONNECTS",
-  //     routes: {
-  //       '/': (_) => LandingPage(),
-  //       '/signinpage': (_) => SignInPage(),
-  //       '/groups': (_) => GroupPage(),
-  //       './join': (_) => Forms(),
-  //       '/register': (_) => RegistrationScreen(),
-  //     },
-  //   );
-  // }
 }

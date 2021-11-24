@@ -17,6 +17,7 @@ class SignInPage extends StatefulWidget {
 final Color cc = Color(0xFFC4C4C4);
 
 class _SignInPageState extends State<SignInPage> {
+  final _auth = FirebaseAuth.instance;
   @override
   void showAlert(BuildContext context, String title, String content) {
     print('Alert');
@@ -45,8 +46,6 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   final controller = Get.put(SignupController());
-
-  final _auth = FirebaseAuth.instance;
 
   final _formKey = GlobalKey<FormState>();
   String email = '';

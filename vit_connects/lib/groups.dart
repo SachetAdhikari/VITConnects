@@ -20,8 +20,7 @@ class GroupPage extends StatefulWidget {
 }
 
 class _GroupPageState extends State<GroupPage> {
-  //FloatingActionButtonLocation _fabLocation =
-  //FloatingActionButtonLocation.centerFloat;
+
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
 

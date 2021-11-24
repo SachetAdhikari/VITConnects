@@ -70,15 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                // messagesStream();
-
-                _auth.signOut();
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignInPage()),
-                );
-                print('user logged out');
               }),
         ],
         title: const Text('️Chat'),
@@ -193,7 +185,7 @@ class MessageBubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            sender,
+            sender.split('@')[0],
             style: const TextStyle(
               fontSize: 12.0,
               color: Colors.black54,
@@ -236,7 +228,8 @@ class MessageBubble extends StatelessWidget {
   }
 
   static String convertDateTime(DateTime d) {
-    DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+    // DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+    DateFormat dateFormat = DateFormat("HH:mm");
     String dateTime = dateFormat.format(d);
     return dateTime;
   }

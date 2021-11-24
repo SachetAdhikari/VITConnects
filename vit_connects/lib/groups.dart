@@ -24,7 +24,7 @@ class _GroupPageState extends State<GroupPage> {
   late User loggedInUser;
 
   final _firestore = FirebaseFirestore.instance;
-  Widget _button(String textt, BuildContext context, String coursename) {
+  Widget _button(String textt, BuildContext context, String coursename, String faculty, String slot) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 60),
       child: MaterialButton(
@@ -34,7 +34,7 @@ class _GroupPageState extends State<GroupPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ChatScreen(course: coursename)),
+                builder: (context) => ChatScreen(course: coursename,faculty: faculty,slot: slot,)),
           );
         },
         color: buttonc,
@@ -127,7 +127,7 @@ class _GroupPageState extends State<GroupPage> {
                       final faculty = message['faculty'];
                       final slot = message['slot'];
                       final user_detailss =
-                          GroupList(coursename: course, slot: slot);
+                          GroupList(coursename: course, slot: slot,faculty: faculty,);
                       groups.add(user_detailss);
                     }
                     //final messageSender = message[''];
@@ -162,10 +162,11 @@ class _GroupPageState extends State<GroupPage> {
 }
 
 class GroupList extends StatelessWidget {
-  const GroupList({Key? key, required this.coursename, required this.slot})
+  const GroupList({Key? key, required this.coursename, required this.slot, required this.faculty})
       : super(key: key);
   final String coursename;
   final String slot;
+  final String faculty;
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +179,7 @@ class GroupList extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ChatScreen(course: coursename)),
+                builder: (context) => ChatScreen(course: coursename,faculty: faculty,slot: slot,)),
           );
         },
         color: buttonc,

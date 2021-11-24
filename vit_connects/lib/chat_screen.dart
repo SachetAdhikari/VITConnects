@@ -6,8 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
-  ChatScreen({required this.course});
-  String course = "";
+  ChatScreen({required this.course, required this.faculty, required this.slot});
+  String course = '';
+  String faculty= '';
+  String slot= '';
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -60,6 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final String collectionName = widget.course+widget.slot+widget.faculty;
     return Scaffold(
       appBar: AppBar(
         leading: null,
@@ -88,7 +91,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             StreamBuilder<QuerySnapshot>(
               stream: _firestore
-                  .collection(widget.course)
+                  .collection(collectionName)
                   .orderBy('time', descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
@@ -146,7 +149,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   FlatButton(
                     onPressed: () {
                       if (messageText != null) {
-                        _firestore.collection(widget.course).add({
+                        _firestore.collection(collectionName).add({
                           'text': messageText,
                           'sender': loggedInUser.email, //from firebase
                           'time': DateTime.now(),

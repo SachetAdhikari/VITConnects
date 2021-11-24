@@ -129,17 +129,16 @@ class _FormssState extends State<Formss> {
                           //color: Colors.white,
                           ),
                     ),
-                    TextField(
-                      controller: titleController,
-                      onChanged: (value) {
-                        title = value;
-                      },
+                    const SizedBox(height: 20),
+                    TextFormField(
                       decoration: InputDecoration(
-                          hintText: 'Title',
-                          hintStyle:
-                              TextStyle(fontFamily: 'ProximaNova', fontSize: 17)
-                          //labelText: 'Course Name',
-                          ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        hintText: 'Title',
+                      ),
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 20,
@@ -152,25 +151,22 @@ class _FormssState extends State<Formss> {
                           //color: Colors.white,
                           ),
                     ),
-                    TextField(
-                      controller: descriptionController,
-                      onChanged: (value) {
-                        description = value;
-                      },
-                      decoration: const InputDecoration(
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         hintText: 'Description',
-                        hintStyle:
-                            TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-                                //color: Colors.white,
-                                ),
-                        //labelText: 'Course Code',
                       ),
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     BasicDateTimeField(),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     //BasicTimeField(),
                     // Row(
                     //   children: <Widget>[

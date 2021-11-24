@@ -1,3 +1,5 @@
+// Function for Cards
+
 import 'package:flutter/material.dart';
 
 Widget showCard(BuildContext context, String title, String subTitle) {
@@ -15,7 +17,9 @@ Widget showCard(BuildContext context, String title, String subTitle) {
             children: [
               IconButton(
                 padding: EdgeInsets.zero,
-                onPressed: () {},
+                onPressed: () {
+                  // Add Something here
+                },
                 icon: const Icon(
                   Icons.edit_rounded,
                 ),
@@ -24,7 +28,9 @@ Widget showCard(BuildContext context, String title, String subTitle) {
               IconButton(
                 constraints: const BoxConstraints(),
                 padding: EdgeInsets.zero,
-                onPressed: () {},
+                onPressed: () {
+                  //Add Something here
+                },
                 icon: const Icon(Icons.delete_rounded),
                 color: Colors.red,
               ),
@@ -47,7 +53,7 @@ Widget showCard(BuildContext context, String title, String subTitle) {
                 subTitle,
                 maxLines: 2,
                 style:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const Text(
                 " Due Date: 10/4/21",

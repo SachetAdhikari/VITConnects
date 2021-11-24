@@ -52,7 +52,7 @@ class _ProfileState extends State<Profile> {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: bg,
+        backgroundColor: Colors.white,
         floatingActionButton: DraggableFab(
           child: FloatingActionButton(
             backgroundColor: Colors.red,
@@ -118,7 +118,7 @@ class _ProfileState extends State<Profile> {
                   return Expanded(
                     child: ListView(
                       //reverse: true,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 20.0),
                       children: groups,
                     ),
@@ -143,23 +143,32 @@ class GroupList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 60),
-      child: MaterialButton(
-        elevation: 0,
-        height: 80,
-        onPressed: () {},
-        color: buttonc,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.red,
+              border: Border.all(
+                color: Colors.red,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
+          height: 60,
+          margin: const EdgeInsets.symmetric(horizontal: 40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontFamily: 'ProximaNova'),
+              ),
+            ],
+          ),
         ),
       ),
     );

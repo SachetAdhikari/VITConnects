@@ -1,250 +1,210 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import './main.dart';
-// import 'constants.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-// class Forms extends StatefulWidget {
-//   Forms({Key? key}) : super(key: key);
+import 'groups.dart';
 
-//   @override
-//   _FormsState createState() => _FormsState();
-// }
+class Formz extends StatefulWidget {
+  // const Formz({ required Key key }) : super(key: key);
 
-// class _FormsState extends State<Forms> {
-//   late User loggedInUser;
-//   final _auth = FirebaseAuth.instance;
-//   final _firestore = FirebaseFirestore.instance;
-//   final _formKey = GlobalKey<FormState>();
-//   List<String> coursename = ['SE', 'ISAA', 'DSA'];
-//   //final datum = snapshot.data!.docs;
-//   String? course = 'SE';
-//   List<String> coursecode = ['CSE3001', 'CSE3009', 'CSE3004'];
-//   String? coursec = 'CSE3001';
-//   List<String> facultyname = ['Sachet', 'Ankit', 'Subham'];
-//   String? faculty = 'Subham';
-//   List<String> slot = ['A1', 'B1', 'C1'];
-//   String? s = 'A1';
-//   @override
-//   void initState() {
-//     super.initState();
-//     getCurrentUser();
-//   }
+  @override
+  _FormzState createState() => _FormzState();
+}
 
-//   void getCurrentUser() async {
-//     try {
-//       final user = await _auth.currentUser;
-//       if (user != null) {
-//         loggedInUser = user;
-//         print(loggedInUser.email);
-//       } else {
-//         print('no user found');
-//       }
-//     } catch (e) {
-//       print(e);
-//     }
-//   }
+class _FormzState extends State<Formz> {
 
-//   Widget _button(String textt, BuildContext context) {
-//     return Container(
-//       margin: const EdgeInsets.symmetric(horizontal: 60),
-//       child: MaterialButton(
-//         elevation: 0,
-//         height: 60,
-//         onPressed: () {
-//           Navigator.push(
-//             context,
-//             MaterialPageRoute(builder: (context) => Forms()),
-//           );
-//         },
-//         color: bc,
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(
-//               textt,
-//               textAlign: TextAlign.center,
-//               style: const TextStyle(
-//                   fontSize: 28, color: Colors.white, fontFamily: 'ProximaNova'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
+  final _formKey = GlobalKey<FormState>();
 
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: bg,
-//       appBar: AppBar(
-//         title: const Text("VIT CONNECT's",
-//             style: TextStyle(fontFamily: 'ProximaNova')),
-//         backgroundColor: pc,
-//       ),
-//       body: SingleChildScrollView(
-//         child: Container(
-//           child: Form(
-//             key: _formKey,
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: <Widget>[
-//                 const SizedBox(
-//                   height: 20,
-//                 ),
-//                 // StreamBuilder<QuerySnapshot>(
-//                 //   stream: _firestore.collection('courses').snapshots(),
-//                 //   builder: (context, snapshot) {
-//                 //     if (!snapshot.hasData) {
-//                 //       return const Center(
-//                 //         child: CircularProgressIndicator(
-//                 //           backgroundColor: Colors.blueAccent,
-//                 //         ),
-//                 //       );
-//                 //     }
-//                 //     final courses = snapshot.data!.docs;
-//                 //     for (var datum in courses) {
-//                 //       final faculty1 = datum['faculty'];
-//                 //       final coursecode1 = datum['id'];
-//                 //       final coursename1 = datum['name'];
-//                 //       facultyname = faculty1.keys.toList();
-//                 //       coursecode.add(coursecode1);
-//                 //       print(coursecode1);
-//                 //       print(facultyname);
-//                 //       print(coursename1);
-//                 //       coursename.add(coursename1);
-//                 //       //slot.add();
-//                 //     }
-//                 //     return Container();
-//                 //   },
-//                 //),
-//                 const Text(
-//                   "Course Name",
-//                   textAlign: TextAlign.left,
-//                   style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-//                       //color: Colors.white,
-//                       ),
-//                 ),
-//                 Container(
-//                   width: 400,
-//                   padding:
-//                       const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-//                   decoration: BoxDecoration(
-//                     border: Border.all(color: Colors.black, width: 4),
-//                   ),
-//                   child: DropdownButtonHideUnderline(
-//                     child: DropdownButton<String>(
-//                       value: course,
-//                       isExpanded: true,
-//                       iconSize: 36,
-//                       icon: const Icon(Icons.arrow_drop_down,
-//                           color: Colors.black),
-//                       items: coursename.map(buildMenuItem).toList(),
-//                       onChanged: (value) => setState(() => course = value),
-//                     ),
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 20,
-//                 ),
-//                 const Text(
-//                   "Course Code",
-//                   textAlign: TextAlign.left,
-//                   style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
+   List<String> courses = ['Choose Course'];
+   List<String> faculties = ['Choose Faculty'];
+   List<String> slots = ['Choose Slot'];
 
-//                       //color: Colors.white,
-//                       ),
-//                 ),
-//                 Container(
-//                   width: 400,
-//                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-//                   decoration: BoxDecoration(
-//                     border: Border.all(color: Colors.black, width: 4),
-//                   ),
-//                   child: DropdownButtonHideUnderline(
-//                     child: DropdownButton<String>(
-//                       value: coursec,
-//                       isExpanded: true,
-//                       iconSize: 36,
-//                       icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-//                       items: coursecode.map(buildMenuItem).toList(),
-//                       onChanged: (value) => setState(() => coursec = value),
-//                     ),
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 20,
-//                 ),
-//                 const Text(
-//                   "Slot",
-//                   textAlign: TextAlign.left,
-//                   style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-//                       //color: Colors.white,
-//                       ),
-//                 ),
-//                 Container(
-//                   width: 400,
-//                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-//                   decoration: BoxDecoration(
-//                     border: Border.all(color: Colors.black, width: 4),
-//                   ),
-//                   child: DropdownButtonHideUnderline(
-//                     child: DropdownButton<String>(
-//                       value: s,
-//                       isExpanded: true,
-//                       iconSize: 36,
-//                       icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-//                       items: slot.map(buildMenuItem).toList(),
-//                       onChanged: (value) => setState(() => s = value),
-//                     ),
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 20,
-//                 ),
-//                 const Text(
-//                   "Faculty Name",
-//                   textAlign: TextAlign.left,
-//                   style: TextStyle(fontSize: 18, fontFamily: 'ProximaNova'
-//                       //color: Colors.white,
-//                       ),
-//                 ),
-//                 Container(
-//                   width: 400,
-//                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-//                   decoration: BoxDecoration(
-//                     border: Border.all(color: Colors.black, width: 4),
-//                   ),
-//                   child: DropdownButtonHideUnderline(
-//                     child: DropdownButton<String>(
-//                       value: course,
-//                       isExpanded: true,
-//                       iconSize: 36,
-//                       icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-//                       items: facultyname.map(buildMenuItem).toList(),
-//                       onChanged: (value) => setState(() => faculty = value),
-//                     ),
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 40,
-//                 ),
-//                 _button("Join", context),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
 
-//   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-//         value: item,
-//         child: Text(
-//           item,
-//           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-//         ),
-//       );
-// }
+  // form values
+  String _course ='Choose Course';
+  String _faculty ='Choose Faculty';
+  String _slot ='Choose Slot';
+
+  bool cCheck=false;
+  bool fCheck=false;
+  bool sCheck=false;
+
+
+  final _auth = FirebaseAuth.instance;
+  late User loggedInUser;
+  final _firestore = FirebaseFirestore.instance;
+
+
+
+  @override
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    getCourse();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      } else {
+        print('no user found');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+  void getCourse() async{
+    final courseList = await _firestore.collection('course').get();
+    for(var courseData in courseList.docs){
+      for (var cID in courseData.data()['id'].keys){
+        courses.add(cID);
+      }
+    }
+}
+
+  void getCourseFaculty(String course) async{
+    faculties=['Choose Faculty'];
+    final courseList = await _firestore.collection('course').get();
+    for(var courseData in courseList.docs){
+      var a = courseData.data().values.toList();
+      a[0].forEach((k,v){
+        if(k==course){
+          v.forEach((name,slot){
+            faculties.add(name);
+          });
+        }
+      } );
+      }
+    }
+
+  void getCourseFacultySlot(String course, String faculty) async{
+    slots=['Choose Slot'];
+    final courseList = await _firestore.collection('course').get();
+    for(var courseData in courseList.docs){
+      var a = courseData.data().values.toList();
+      a[0].forEach((k,v){
+        if(k==course){
+          v.forEach((name,slot){
+            if(name==faculty){
+              print(slot);
+              for (var s in slot){
+                slots.add(s);
+              }
+            }
+          });
+        }
+      } );
+    }
+  }
+
+
+
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              Text(
+                'Join New Group',
+                style: TextStyle(fontSize: 18.0),
+              ),
+              SizedBox(height: 20.0),
+              DropdownButtonFormField<String>(
+                value: _course,
+                // decoration: textInputDecoration,
+                items: courses.map((course) {
+                  return DropdownMenuItem(
+                    value: course,
+                    child: Text(course),
+                  );
+                }).toList(),
+                onChanged: (val) => setState(() {
+                  _course = val!;
+                  getCourseFaculty(_course);
+                  if(_course!='Choose Course'){
+                    cCheck=true;
+                  }
+
+
+                }),
+              ),
+              SizedBox(height: 10.0),
+              DropdownButtonFormField<String>(
+                // value: _faculty,
+                // decoration: textInputDecoration,
+                items: faculties.map((faculty) {
+                  return DropdownMenuItem(
+                    value: faculty,
+                    child: Text(faculty),
+                  );
+                }).toList(),
+                // onChanged: (val) => setState(() => _faculty = val!),
+                onChanged: (val) => setState(() {
+                  _faculty = val!;
+                  getCourseFacultySlot(_course,_faculty);
+                  if(_faculty!='Choose Faculty'){
+                    fCheck=true;
+                  }
+
+
+                }),
+              ),
+              SizedBox(height: 10.0),
+              DropdownButtonFormField<String>(
+                // value: _slot,
+                // decoration: textInputDecoration,
+                items: slots.map((slot) {
+                  return DropdownMenuItem(
+                    value: slot,
+                    child: Text(slot),
+                  );
+                }).toList(),
+                // onChanged: (val) => setState(() => _slot = val!),
+                onChanged: (val) => setState(() {
+                  _slot = val!;
+                  if(_slot!='Choose Slot'){
+                    sCheck=true;
+                  }
+
+
+                }),
+              ),
+              SizedBox(height: 10.0),
+              RaisedButton(
+                  color: Colors.pink[400],
+                  child: Text(
+                    'Join',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    print(_faculty);
+                    print(_slot);
+                    print(_course);
+                    if (cCheck&&fCheck&&sCheck) {
+                      _firestore.collection('user').add({
+                        'course': _course,
+                        'email': loggedInUser.email, //from firebase
+                        'faculty':_faculty,
+                        'slot':_slot,
+                      });
+                      Navigator.pop(context);
+                      MaterialPageRoute(builder: (context) => GroupPage());
+                    }
+                  }
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+}

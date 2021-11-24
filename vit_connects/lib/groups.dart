@@ -51,7 +51,7 @@ class _GroupPageState extends State<GroupPage> {
             Text(
               textt,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 28, color: Colors.white, fontFamily: 'Red Rose'),
             ),
           ],

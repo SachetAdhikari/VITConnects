@@ -1,6 +1,7 @@
 // Function for Cards
 
 import 'package:flutter/material.dart';
+import 'todo_form.dart';
 
 Widget showCard(BuildContext context, String title, String subTitle,
     String date, String time) {
@@ -19,7 +20,11 @@ Widget showCard(BuildContext context, String title, String subTitle,
                 IconButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    // Add Something here
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Formss(
+                              title: title,
+                              brief: subTitle,
+                            )));
                   },
                   icon: const Icon(
                     Icons.edit_rounded,

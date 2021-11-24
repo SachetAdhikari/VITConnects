@@ -14,7 +14,10 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart';
 
 class Formss extends StatefulWidget {
-  Formss({Key? key}) : super(key: key);
+  String? title; //optional paremeters
+  String? brief;
+  DateTime? dt;
+  Formss({Key? key, this.title, this.brief, this.dt}) : super(key: key);
 
   @override
   _FormssState createState() => _FormssState();
@@ -91,6 +94,17 @@ class _FormssState extends State<Formss> {
   //DateTime _dateTime;
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
+    final _titlecontroller = TextEditingController();
+    final _briefcontroller = TextEditingController();
+
+    if (widget.title != null) {
+      _titlecontroller.text = widget.title ?? "";
+    }
+    if (widget.brief != null) {
+      _briefcontroller.text = widget.brief ?? "";
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -131,6 +145,7 @@ class _FormssState extends State<Formss> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      controller: _titlecontroller,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
@@ -153,6 +168,7 @@ class _FormssState extends State<Formss> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      controller: _briefcontroller,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),

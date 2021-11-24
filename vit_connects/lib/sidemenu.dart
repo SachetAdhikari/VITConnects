@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vit_connects/profile.dart';
+import 'package:vit_connects/groups.dart';
 import './main.dart';
 
 class SideMenu extends StatelessWidget {
@@ -43,12 +44,32 @@ class SideMenu extends StatelessWidget {
                   }),
           ListTile(
               leading: const Icon(
-                Icons.settings,
+                Icons.checklist_rounded,
                 color: Colors.red,
               ),
-              title: const Text('Settings',
+              title: const Text("To-Do lists",
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
-              onTap: () => {Navigator.of(context).pop()}),
+              onTap: () => {
+                //Navigator.of(context).pop()
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                ),
+              }),
+          ListTile(
+              leading: const Icon(
+                Icons.chat,
+                color: Colors.red,
+              ),
+              title: const Text("Chat Rooms",
+                  style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
+              onTap: () => {
+                //Navigator.of(context).pop()
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GroupPage()),
+                ),
+              }),
           ListTile(
               leading: const Icon(
                 Icons.exit_to_app,

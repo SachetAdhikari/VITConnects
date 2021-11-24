@@ -262,7 +262,6 @@ class _SignInPageState extends State<SignInPage> {
                             print(controller.googleAccount.value?.email ?? '');
                             String emailz =
                                 controller.googleAccount.value?.email ?? '';
-                            // String emailz='sachet.adhikari2019@vitstudent.ac.in';
                             List isVitian = emailz.split('@');
                             if (isVitian[1] == 'vitstudent.ac.in') {
                               Navigator.push(

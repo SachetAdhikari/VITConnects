@@ -8,6 +8,7 @@ import 'package:vit_connects/chat_screen.dart';
 import './main.dart';
 import './form.dart';
 import './sidemenu.dart';
+import 'custom_card.dart';
 
 //import './sidemenu.dart';
 class GroupPage extends StatefulWidget {
@@ -111,6 +112,7 @@ class _GroupPageState extends State<GroupPage> {
         body: Center(
           child: Column(
             children: <Widget>[
+              showCard(context, "title", "Desc", "date", "time"),
               StreamBuilder<QuerySnapshot>(
                 stream: _firestore.collection('user').snapshots(),
                 builder: (context, snapshot) {

@@ -112,7 +112,7 @@ class _GroupPageState extends State<GroupPage> {
         body: Center(
           child: Column(
             children: <Widget>[
-              showCard(context, "title", "Desc", "date", "time"),
+              //showCard(context, "title", "Desc", "date", "time"),
               StreamBuilder<QuerySnapshot>(
                 stream: _firestore.collection('user').snapshots(),
                 builder: (context, snapshot) {

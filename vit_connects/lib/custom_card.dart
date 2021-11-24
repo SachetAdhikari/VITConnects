@@ -1,10 +1,11 @@
 // Function for Cards
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'todo_form.dart';
 
 Widget showCard(BuildContext context, String title, String subTitle,
-    String date, String time) {
+    String date, String time, final _firestore) {
   return Container(
       height: 110,
       color: Colors.red,
@@ -35,7 +36,30 @@ Widget showCard(BuildContext context, String title, String subTitle,
                   constraints: const BoxConstraints(),
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    //Add Something here
+                    StreamBuilder<QuerySnapshot>(
+                      stream: _firestore
+                          .collection('ToDo')
+                          .orderBy('time', descending: true)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.blueAccent,
+                            ),
+                          );
+                        }
+                        final messages = snapshot.data!.docs;
+                        for (var msg in messages) {
+                          final titles = msg['title'];
+                          if (title == titles) {
+                            msg.reference.delete();
+                          }
+                        }
+                        return Container();
+                      },
+                    );
+                    //await _firestore.instance.collection('ToDo').document();
                   },
                   icon: const Icon(Icons.delete_rounded),
                   color: Colors.red,

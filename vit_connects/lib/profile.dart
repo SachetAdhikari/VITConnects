@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
+import 'package:vit_connects/custom_card.dart';
 import 'package:vit_connects/form.dart';
 import 'package:vit_connects/groups.dart';
 import 'package:vit_connects/main.dart';
@@ -93,16 +94,17 @@ class _ProfileState extends State<Profile> {
                   }
                   // final messages = snapshot.data!.docs.reversed;
                   final user_details = snapshot.data!.docs;
-                  List<GroupList> groups = [];
+                  List<Widget> groups = [];
                   for (var message in user_details) {
                     // final messageText = message.data['text'];
                     final email = message['email'];
                     if (email == loggedInUser.email) {
                       final title = message['title'];
                       final description = message['description'];
-                      final user_detailss =
-                          GroupList(title: title, description: description);
-                      groups.add(user_detailss);
+                      //showCard(context, title, description, 'date', 'time');
+                      //final user_detailss = GroupList(title: title, description: description);
+                      groups.add(showCard(context, title, description, 'date',
+                          'time', _firestore));
                     }
                     //final messageSender = message[''];
                     //final sentTime = message['time'];

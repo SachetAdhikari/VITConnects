@@ -53,44 +53,6 @@ class _FormssState extends State<Formss> {
     }
   }
 
-  Widget _button(String textt, BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // if (coursename != null) {
-        //   _firestore.collection('user').add({
-        //     'course': coursename,
-        //     'email': loggedInUser.email, //from firebase
-        //     'faculty': faculty,
-        //     'slot': slot,
-        //   });
-        // }
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Formss()),
-        );
-      },
-      child: Container(
-        height: 60,
-        margin: const EdgeInsets.symmetric(horizontal: 60),
-        decoration: BoxDecoration(
-            color: Colors.red,
-            border: Border.all(color: Colors.red),
-            borderRadius: const BorderRadius.all(Radius.circular(30))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              textt,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  fontSize: 28, color: Colors.white, fontFamily: 'ProximaNova'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   //DateTime _dateTime;
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

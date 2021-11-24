@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:vit_connects/chat_screen.dart';
-import 'package:vit_connects/profile.dart';
 import 'package:vit_connects/signinpage.dart';
 import './landingpage.dart';
-import './form.dart';
 import './groups.dart';
-import 'package:vit_connects/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'forms.dart';
 
 void main() {
   runApp(VitConnects());
@@ -40,7 +38,7 @@ class VitConnects extends StatelessWidget {
             '/': (_) => LandingPage(),
             '/signinpage': (_) => SignInPage(),
             '/groups': (_) => GroupPage(),
-            './join': (_) => Forms(),
+            // './join': (_) => Formz(),
             //'/chat': (_) => ChatScreen(),
           },
         );

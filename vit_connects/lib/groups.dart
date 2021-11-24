@@ -9,6 +9,7 @@ import './main.dart';
 import './form.dart';
 import './sidemenu.dart';
 import 'custom_card.dart';
+import 'forms.dart';
 
 //import './sidemenu.dart';
 class GroupPage extends StatefulWidget {
@@ -90,7 +91,7 @@ class _GroupPageState extends State<GroupPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Forms()),
+                MaterialPageRoute(builder: (context) => Formz()),
               );
             },
             child: const Icon(Icons.add),

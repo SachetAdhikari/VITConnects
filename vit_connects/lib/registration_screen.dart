@@ -1,15 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vit_connects/groups.dart';
-// import 'package:modal_progress_hud/modal_progress_hud.dart';
-
-import 'chat_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key, required this.email}) : super(key: key);
+  const RegistrationScreen({Key? key, required this.email, required this.displayName, required this.photoUrl
+  , required this.gID}) : super(key: key);
 
   final String email;
+  final String displayName;
+  final String photoUrl;
+  final String gID;
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -17,6 +19,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   String password = '';
   String cPassword = '';
   @override
@@ -90,11 +94,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () async {
-                    if (password == cPassword) {
+                    if (password!=null && password == cPassword) {
                       try {
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
                                 email: widget.email, password: password);
+                        _firestore.collection('registeredUsers').add({
+                          'email': widget.email,
+                          'displayName': widget.displayName, //from firebase
+                          'photoUrl': widget.photoUrl,
+                          'gID':widget.gID,
+                        });
                         if (newUser != null) {
                           Navigator.push(
                             context,

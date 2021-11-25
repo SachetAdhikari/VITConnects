@@ -275,12 +275,20 @@ class _SignInPageState extends State<SignInPage> {
                                     fontWeight: FontWeight.w600)),
                             onPressed: () {
                               controller.login();
-                              print('signup successfull');
-                              print(
-                                  controller.googleAccount.value?.email ?? '');
+
+                              print('google auth successfull');
+
                               String emailz =
                                   controller.googleAccount.value?.email ?? '';
+                              String displayName = controller.googleAccount.value?.displayName ?? '';
+                              String photoUrl= controller.googleAccount.value?.photoUrl ?? '';
+                              String gID = controller.googleAccount.value?.id ?? '';
+
+                              print(emailz+' '+displayName+' '+photoUrl+' '+gID);
+
+
                               // String emailz='sachet.adhikari2019@vitstudent.ac.in';
+
                               List isVitian = emailz.split('@');
                               if (isVitian[1] == 'vitstudent.ac.in') {
                                 Navigator.push(
@@ -288,6 +296,9 @@ class _SignInPageState extends State<SignInPage> {
                                   MaterialPageRoute(
                                       builder: (context) => RegistrationScreen(
                                         email: emailz,
+                                        displayName: displayName,
+                                        photoUrl: photoUrl,
+                                        gID: gID,
                                       )),
                                 );
                                 controller.logout();

@@ -7,6 +7,7 @@ import 'package:vit_connects/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:vit_connects/signup_controller.dart';
+import 'package:vit_connects/user_profile.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
         onPressed: () async {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => GroupPage()),
+            MaterialPageRoute(builder: (context) => User_Profile()),
           );
           //startSignIn();
           //if (_formKey.currentState.validate()) {
@@ -203,14 +204,14 @@ class _SignInPageState extends State<SignInPage> {
                         Material(
                           color: Colors.red,
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(30.0)),
+                              const BorderRadius.all(Radius.circular(30.0)),
                           elevation: 5.0,
                           child: MaterialButton(
                             onPressed: () async {
                               try {
                                 final user =
-                                await _auth.signInWithEmailAndPassword(
-                                    email: email, password: password);
+                                    await _auth.signInWithEmailAndPassword(
+                                        email: email, password: password);
                                 if (user != null) {
                                   Navigator.push(
                                     context,
@@ -280,12 +281,22 @@ class _SignInPageState extends State<SignInPage> {
 
                               String emailz =
                                   controller.googleAccount.value?.email ?? '';
-                              String displayName = controller.googleAccount.value?.displayName ?? '';
-                              String photoUrl= controller.googleAccount.value?.photoUrl ?? '';
-                              String gID = controller.googleAccount.value?.id ?? '';
+                              String displayName =
+                                  controller.googleAccount.value?.displayName ??
+                                      '';
+                              String photoUrl =
+                                  controller.googleAccount.value?.photoUrl ??
+                                      '';
+                              String gID =
+                                  controller.googleAccount.value?.id ?? '';
 
-                              print(emailz+' '+displayName+' '+photoUrl+' '+gID);
-
+                              print(emailz +
+                                  ' ' +
+                                  displayName +
+                                  ' ' +
+                                  photoUrl +
+                                  ' ' +
+                                  gID);
 
                               // String emailz='sachet.adhikari2019@vitstudent.ac.in';
 
@@ -295,11 +306,11 @@ class _SignInPageState extends State<SignInPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => RegistrationScreen(
-                                        email: emailz,
-                                        displayName: displayName,
-                                        photoUrl: photoUrl,
-                                        gID: gID,
-                                      )),
+                                            email: emailz,
+                                            displayName: displayName,
+                                            photoUrl: photoUrl,
+                                            gID: gID,
+                                          )),
                                 );
                                 controller.logout();
                                 print('logged out');

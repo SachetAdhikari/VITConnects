@@ -25,6 +25,9 @@ class Formss extends StatefulWidget {
 
 class _FormssState extends State<Formss> {
   DateTime? _dateTime;
+  //DateTime? now;
+  String formattedDate =
+      DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
@@ -108,6 +111,7 @@ class _FormssState extends State<Formss> {
                     const SizedBox(height: 20),
                     TextFormField(
                       controller: _titlecontroller,
+                      onChanged: ,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
@@ -197,13 +201,14 @@ class _FormssState extends State<Formss> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (title != null) {
-                          _firestore.collection('ToDo').add({
-                            'title': title,
-                            'email': loggedInUser.email, //from firebase
-                            'description': description,
-                          });
-                        }
+                        //if (title != null) {
+                        _firestore.collection('ToDo').add({
+                          'title': title,
+                          'email': loggedInUser.email, //from firebase
+                          'description': description,
+                          'dateNtime': DateTimeField,
+                        });
+                        //}
                         // titleController.clear();
                         // descriptionController.clear();
                         Navigator.push(

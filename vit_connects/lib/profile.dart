@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:vit_connects/custom_card.dart';
 import 'package:vit_connects/form.dart';
 import 'package:vit_connects/groups.dart';
@@ -101,10 +102,15 @@ class _ProfileState extends State<Profile> {
                     if (email == loggedInUser.email) {
                       final title = message['title'];
                       final description = message['description'];
+                      final dateNtime = message['dateNtime'];
+                      DateTime ok = (dateNtime).toDate();
+                      String formattedDate =
+                          DateFormat('yyyy-MM-dd').format(ok);
+                      String formattedTime = DateFormat('hh:mm').format(ok);
                       //showCard(context, title, description, 'date', 'time');
                       //final user_detailss = GroupList(title: title, description: description);
-                      groups.add(showCard(context, title, description, 'date',
-                          'time', _firestore));
+                      groups.add(showCard(context, title, description,
+                          formattedDate, formattedTime, _firestore));
                     }
                     //final messageSender = message[''];
                     //final sentTime = message['time'];

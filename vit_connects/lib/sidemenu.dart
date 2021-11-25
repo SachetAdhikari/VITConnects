@@ -5,6 +5,7 @@ import 'package:vit_connects/profile.dart';
 import 'package:vit_connects/groups.dart';
 import 'package:vit_connects/signinpage.dart';
 import './main.dart';
+import './user_profile.dart';
 
 class SideMenu extends StatelessWidget {
   //const SideMenu({ Key? key }) : super(key: key);
@@ -43,7 +44,7 @@ class SideMenu extends StatelessWidget {
                     //Navigator.of(context).pop()
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Profile()),
+                      MaterialPageRoute(builder: (context) => User_Profile()),
                     ),
                   }),
           ListTile(
@@ -54,12 +55,12 @@ class SideMenu extends StatelessWidget {
               title: const Text("To-Do lists",
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {
-                //Navigator.of(context).pop()
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Profile()),
-                ),
-              }),
+                    //Navigator.of(context).pop()
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Profile()),
+                    ),
+                  }),
           ListTile(
               leading: const Icon(
                 Icons.chat,
@@ -68,12 +69,12 @@ class SideMenu extends StatelessWidget {
               title: const Text("Chat Rooms",
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
               onTap: () => {
-                //Navigator.of(context).pop()
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GroupPage()),
-                ),
-              }),
+                    //Navigator.of(context).pop()
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GroupPage()),
+                    ),
+                  }),
           ListTile(
               leading: const Icon(
                 Icons.exit_to_app,
@@ -81,17 +82,16 @@ class SideMenu extends StatelessWidget {
               ),
               title: const Text('Log Out',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
-              onTap: (){
-
-    _auth.signOut();
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SignInPage()),
-    );
-    print('user logged out');
-                }
-          )],
+              onTap: () {
+                _auth.signOut();
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInPage()),
+                );
+                print('user logged out');
+              })
+        ],
       ),
     );
   }

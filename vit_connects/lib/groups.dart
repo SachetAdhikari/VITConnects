@@ -20,7 +20,6 @@ class GroupPage extends StatefulWidget {
 }
 
 class _GroupPageState extends State<GroupPage> {
-
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
 
@@ -77,6 +76,22 @@ class _GroupPageState extends State<GroupPage> {
     } catch (e) {
       print(e);
     }
+  }
+
+  String code(String s, int a) {
+    String ok = '';
+    if (a > 0) {
+      while (s[a] != ' ') {
+        ok = s[a] + ok;
+        a--;
+      }
+    } else {
+      while (s[a] != ' ') {
+        ok = ok + s[a];
+        a++;
+      }
+    }
+    return ok;
   }
 
   Widget build(BuildContext context) {
@@ -137,6 +152,8 @@ class _GroupPageState extends State<GroupPage> {
                         coursename: course,
                         slot: slot,
                         faculty: faculty,
+                        //coursenames: code(course, course.length() - 1),
+                        //coursename: course,
                       );
                       groups.add(user_detailss);
                     }
@@ -177,6 +194,8 @@ class GroupList extends StatelessWidget {
       required this.coursename,
       required this.slot,
       required this.faculty})
+      //required this.coursenames,
+      //required this.coursename})
       : super(key: key);
   final String coursename;
   final String slot;
@@ -199,23 +218,82 @@ class GroupList extends StatelessWidget {
           );
         },
         child: Container(
-          height: 60,
-          margin: const EdgeInsets.symmetric(horizontal: 30),
-          decoration: BoxDecoration(
-              color: Colors.red,
-              border: Border.all(
-                color: Colors.red,
+          height: 110,
+          color: Colors.red,
+          child: Card(
+            elevation: 8,
+            color: Colors.white,
+            child: ListTile(
+              // trailing: Padding(
+              //   padding: const EdgeInsets.only(top: 25.0),
+              //   child: Row(
+              //     mainAxisSize: MainAxisSize.min,
+              //     children: [
+
+              //     ],
+              //   ),
+              // ),
+              title: Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Text(
+                  coursename,
+                  maxLines: 2,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
+                ),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
-          child: Center(
-            child: Text(
-              coursename + " " + slot,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  fontSize: 28, color: Colors.white, fontFamily: 'ProximaNova'),
+              subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10),
+                      // Text(
+                      //   coursename,
+                      //   maxLines: 2,
+                      //   style: const TextStyle(
+                      //       fontWeight: FontWeight.bold, fontSize: 16),
+                      // ),
+                      Row(
+                        children: [
+                          Text(
+                            "Faculty: " + faculty,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "Slot: " + slot,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          )
+                        ],
+                      )
+                    ],
+                  )),
             ),
           ),
         ),
+        // child: Container(
+        //   height: 60,
+        //   margin: const EdgeInsets.symmetric(horizontal: 30),
+        //   decoration: BoxDecoration(
+        //       color: Colors.red,
+        //       border: Border.all(
+        //         color: Colors.red,
+        //       ),
+        //       borderRadius: const BorderRadius.all(Radius.circular(20))),
+        //   child: Center(
+        //     child: Text(
+        //       coursename + " " + slot,
+        //       textAlign: TextAlign.center,
+        //       style: const TextStyle(
+        //           fontSize: 28, color: Colors.white, fontFamily: 'ProximaNova'),
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }

@@ -39,7 +39,7 @@ Widget showCard(BuildContext context, String title, String subTitle,
                     StreamBuilder<QuerySnapshot>(
                       stream: _firestore
                           .collection('ToDo')
-                          .orderBy('time', descending: true)
+                          //.orderBy('time', descending: true)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {

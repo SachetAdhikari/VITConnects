@@ -72,7 +72,7 @@ class _User_ProfileState extends State<User_Profile> {
   @override
   Widget _button(String text) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 60),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
       child: MaterialButton(
         elevation: 0,
         height: 60,
@@ -106,7 +106,7 @@ class _User_ProfileState extends State<User_Profile> {
           //}
           //}
         },
-        color: pc,
+        color: Colors.red,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -170,18 +170,19 @@ class _User_ProfileState extends State<User_Profile> {
                 ],
               ),
             ),
+            SizedBox(height:35.0),
             Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 30.0, right: 40.0),
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Image.asset(
                     'assets/images/icon.png',
-                    height: 100,
+                    height: 50,
                     width: 100,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Text(
                     'VIT-Connect\'s',
                     style: TextStyle(
@@ -237,7 +238,7 @@ Widget display(context, final photo, final displayName, String email) {
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 28,
-              color: Colors.black,
+              color: Colors.red,
               fontFamily: 'Work Sans'),
         ),
       ),
@@ -247,7 +248,7 @@ Widget display(context, final photo, final displayName, String email) {
           displayName.split(' ')[2],
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 28, color: Colors.black, fontFamily: 'Work Sans'),
+              fontSize: 28, color: Colors.red, fontFamily: 'Work Sans'),
         ),
       ),
       Padding(
@@ -257,7 +258,8 @@ Widget display(context, final photo, final displayName, String email) {
           email,
           textAlign: TextAlign.left,
           style: TextStyle(
-              fontSize: 20, color: Colors.black, fontFamily: 'Work Sans'),
+              fontSize: 20, color: Colors.red
+              , fontFamily: 'Work Sans'),
         ),
       ),
     ],
@@ -311,7 +313,7 @@ class CircularImage extends StatelessWidget {
       decoration: new BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-              color: Colors.teal, width: 10.0, style: BorderStyle.solid),
+              color: Colors.red, width: 10.0, style: BorderStyle.solid),
           image: new DecorationImage(
               fit: BoxFit.cover, image: AssetImage(imagePath))),
     );

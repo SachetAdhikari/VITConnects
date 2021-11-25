@@ -2,16 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vit_connects/form.dart';
-import './main.dart';
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-// For changing the language
-//import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:vit_connects/profile.dart';
 
 class Formss extends StatefulWidget {
   String? title; //optional paremeters
@@ -87,17 +80,6 @@ class _FormssState extends State<Formss> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: <Widget>[
-                    // SizedBox(height: 24),
-                    // Clock24Example(),
-                    // SizedBox(height: 24),
-                    // LocaleExample(),
-                    // SizedBox(height: 24),
-                    // BasicDateTimeField(),
-                    // SizedBox(height: 24),
-                    // IosStylePickers(),
-                    // SizedBox(height: 24),
-                    // ComplexDateTimeField(),
-                    // SizedBox(height: 24),
                     Container(
                       height: size.height * 0.10,
                     ),
@@ -111,7 +93,6 @@ class _FormssState extends State<Formss> {
                     const SizedBox(height: 20),
                     TextFormField(
                       controller: _titlecontroller,
-                      // onChanged: print("changed"),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
@@ -119,7 +100,9 @@ class _FormssState extends State<Formss> {
                         hintText: 'Title',
                       ),
                       textAlign: TextAlign.center,
-                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {
+                        setState(() => title = value);
+                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -142,79 +125,36 @@ class _FormssState extends State<Formss> {
                         hintText: 'Description',
                       ),
                       textAlign: TextAlign.center,
-                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {
+                        setState(() => description = value);
+                      },
+
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     BasicDateTimeField(),
                     const SizedBox(height: 20),
-                    //BasicTimeField(),
-                    // Row(
-                    //   children: <Widget>[
-                    //     IconButton(
-                    //       icon: Icon(Icons.date_range),
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {
-                    //         showDatePicker(
-                    //                 context: context,
-                    //                 initialDate: _dateTime ?? DateTime.now(),
-                    //                 firstDate: DateTime(2001),
-                    //                 lastDate: DateTime(2025))
-                    //             .then((date) {
-                    //           setState(() {
-                    //             _dateTime = date!;
-                    //           });
-                    //         });
-                    //       },
-                    //     ),
-                    //     // RaisedButton(
-                    //     //   child: Text('Pick a date'),
-                    //     //   onPressed: () {
-                    //     //     showDatePicker(
-                    //     //             context: context,
-                    //     //             initialDate: _dateTime ?? DateTime.now(),
-                    //     //             firstDate: DateTime(2001),
-                    //     //             lastDate: DateTime(2025))
-                    //     //         .then((date) {
-                    //     //       setState(() {
-                    //     //         _dateTime = date!;
-                    //     //       });
-                    //     //     });
-                    //     //   },
-                    //     // ),
-                    //     Text(_dateTime == null
-                    //         ? "-----------"
-                    //         : _dateTime.toString()),
-                    //     //   // Expanded(
-                    //     //   //   child: TextField(
-                    //     //   //     decoration: InputDecoration(
-                    //     //   //       hintText: 'Date Created',
-                    //     //   //     ),
-                    //     //   //     //readOnly:true, // Or wrap the input with AbsorbPointer if you do not want the field to get highlighted by taping on it
-                    //     //   //   ),
-                    //     //   // ),
-                    //   ],
-                    // ),
                     const SizedBox(
                       height: 40,
                     ),
                     GestureDetector(
                       onTap: () {
-                        //if (title != null) {
-                        _firestore.collection('ToDo').add({
-                          'title': title,
-                          'email': loggedInUser.email, //from firebase
-                          'description': description,
-                          'dateNtime': DateTimeField,
-                        });
-                        //}
-                        // titleController.clear();
-                        // descriptionController.clear();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Formss()),
+                        print(DateTimeField);
+                        if(title!=null){
+                          _firestore.collection('ToDo').add({
+                            'title': title,
+                            'email': loggedInUser.email, //from firebase
+                            'description': description,
+                            'dateNtime': DateTimeField,
+                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Profile(),
+                        )
                         );
+                        }
+
                       },
                       child: Container(
                         height: 60,
@@ -226,11 +166,11 @@ class _FormssState extends State<Formss> {
                                 const BorderRadius.all(Radius.circular(30))),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
+                          children: const <Widget>[
                             Text(
                               "Add Task",
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 28,
                                   color: Colors.white,
                                   fontFamily: 'ProximaNova'),

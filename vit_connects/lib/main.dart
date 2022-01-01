@@ -3,8 +3,7 @@ import 'package:vit_connects/signinpage.dart';
 import './landingpage.dart';
 import './groups.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'forms.dart';
+import 'constants.dart';
 
 void main() {
   runApp(VitConnects());

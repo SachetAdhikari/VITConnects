@@ -73,7 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 Navigator.pop(context);
               }),
         ],
-        title: const Text('️Chat'),
+        title:  Text(widget.course+' ['+widget.slot+']'),
         backgroundColor: Colors.red,
       ),
       body: SafeArea(

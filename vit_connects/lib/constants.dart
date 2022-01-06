@@ -18,4 +18,7 @@ const kMessageContainerDecoration = BoxDecoration(
   ),
 );
 
-
+const Color bg = Color(0xffA49F9F);
+const Color pc = Color(0xff100202);
+const Color buttonc = Color(0xff2EF31D);
+const Color bc = Color.fromARGB(255, 103, 137, 131);

@@ -57,7 +57,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         floatingActionButton: DraggableFab(
           child: FloatingActionButton(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
             onPressed: () {
               Navigator.push(
                 context,
@@ -69,16 +69,27 @@ class _ProfileState extends State<Profile> {
         ),
         drawer: Drawer(child: SideMenu()),
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue,
           title: const Text("To Do",
               style: TextStyle(
-                  fontFamily: 'ProximaNova', fontWeight: FontWeight.bold)),
+                  fontFamily: 'ProximaNova', fontWeight: FontWeight.bold)
+          ),
           leading: IconButton(
             icon: const Icon(
               Icons.menu,
             ),
             onPressed: () => _scaffoldKey.currentState?.openDrawer(),
           ),
+          actions: <Widget>[Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: ImageIcon(
+                    AssetImage("images/icon.png"),
+                    size: 4,),
+                )
+            ),
+          ],
         ),
         body: Center(
           child: Column(
@@ -107,8 +118,16 @@ class _ProfileState extends State<Profile> {
                       String formattedDate =
                           DateFormat('yyyy-MM-dd').format(ok);
                       String formattedTime = DateFormat('hh:mm').format(ok);
+                      // final todo_detail = GroupList(
+                      //   title: title,
+                      //   description: description,
+                      // );
                       //showCard(context, title, description, 'date', 'time');
                       //final user_detailss = GroupList(title: title, description: description);
+                      // groups.add(todo_detail);
+                      groups.add(const SizedBox(
+                        height: 20,
+                      ));
                       groups.add(showCard(context, title, description,
                           formattedDate, formattedTime, _firestore));
                     }
@@ -129,8 +148,10 @@ class _ProfileState extends State<Profile> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 20.0),
                       children: groups,
+
                     ),
                   );
+
 
                   return Container();
                 },
@@ -157,9 +178,9 @@ class GroupList extends StatelessWidget {
         onTap: () {},
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.blue,
               border: Border.all(
-                color: Colors.red,
+                color: Colors.blue,
               ),
               borderRadius: const BorderRadius.all(Radius.circular(20))),
           height: 60,

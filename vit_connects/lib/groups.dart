@@ -101,7 +101,7 @@ class _GroupPageState extends State<GroupPage> {
         backgroundColor: Colors.white,
         floatingActionButton: DraggableFab(
           child: FloatingActionButton(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
             onPressed: () {
               Navigator.push(
                 context,
@@ -113,7 +113,7 @@ class _GroupPageState extends State<GroupPage> {
         ),
         drawer: Drawer(child: SideMenu()),
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue,
           title: const Text("Groups",
               style: TextStyle(
                   fontFamily: 'ProximaNova', fontWeight: FontWeight.bold)),
@@ -219,7 +219,7 @@ class GroupList extends StatelessWidget {
         },
         child: Container(
           height: 110,
-          color: Colors.red,
+          color: Colors.blue,
           child: Card(
             elevation: 8,
             color: Colors.white,

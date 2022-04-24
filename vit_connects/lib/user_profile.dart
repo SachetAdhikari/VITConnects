@@ -106,7 +106,7 @@ class _User_ProfileState extends State<User_Profile> {
           //}
           //}
         },
-        color: Colors.red,
+        color: Colors.blue,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -125,7 +125,7 @@ class _User_ProfileState extends State<User_Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
         title: Text(
           'Profile',
           textAlign: TextAlign.center,
@@ -188,7 +188,7 @@ class _User_ProfileState extends State<User_Profile> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 28,
-                        color: Colors.red,
+                        color: Colors.blue,
                         fontFamily: 'Work Sans'),
                   ),
                 ),
@@ -238,7 +238,7 @@ Widget display(context, final photo, final displayName, String email) {
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 28,
-              color: Colors.red,
+              color: Colors.black,
               fontFamily: 'Work Sans'),
         ),
       ),
@@ -248,7 +248,7 @@ Widget display(context, final photo, final displayName, String email) {
           displayName.split(' ')[2],
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 28, color: Colors.red, fontFamily: 'Work Sans'),
+              fontSize: 28, color: Colors.black, fontFamily: 'Work Sans'),
         ),
       ),
       Padding(
@@ -258,7 +258,7 @@ Widget display(context, final photo, final displayName, String email) {
           email,
           textAlign: TextAlign.left,
           style: TextStyle(
-              fontSize: 20, color: Colors.red
+              fontSize: 20, color: Colors.black
               , fontFamily: 'Work Sans'),
         ),
       ),
@@ -313,7 +313,7 @@ class CircularImage extends StatelessWidget {
       decoration: new BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-              color: Colors.red, width: 10.0, style: BorderStyle.solid),
+              color: Colors.blue, width: 10.0, style: BorderStyle.solid),
           image: new DecorationImage(
               fit: BoxFit.cover, image: AssetImage(imagePath))),
     );

@@ -147,7 +147,7 @@ class _FormzState extends State<Formz> {
         title: const Text("Join Groups",
             style: TextStyle(
                 fontFamily: 'ProximaNova', fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -274,8 +274,8 @@ class _FormzState extends State<Formz> {
                         height: 60,
                         margin: const EdgeInsets.symmetric(horizontal: 60),
                         decoration: BoxDecoration(
-                            color: Colors.red,
-                            border: Border.all(color: Colors.red),
+                            color: Colors.blue,
+                            border: Border.all(color: Colors.blue),
                             borderRadius:
                             const BorderRadius.all(Radius.circular(30))),
                         child: Row(

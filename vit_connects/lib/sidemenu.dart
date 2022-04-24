@@ -30,13 +30,13 @@ class SideMenu extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.blue,
             ),
           ),
           ListTile(
               leading: const Icon(
                 Icons.verified_user,
-                color: Colors.red,
+                color: Colors.blue,
               ),
               title: const Text('Profile',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
@@ -50,7 +50,7 @@ class SideMenu extends StatelessWidget {
           ListTile(
               leading: const Icon(
                 Icons.checklist_rounded,
-                color: Colors.red,
+                color: Colors.blue,
               ),
               title: const Text("To-Do lists",
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
@@ -64,7 +64,7 @@ class SideMenu extends StatelessWidget {
           ListTile(
               leading: const Icon(
                 Icons.chat,
-                color: Colors.red,
+                color: Colors.blue,
               ),
               title: const Text("Chat Rooms",
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),
@@ -78,7 +78,7 @@ class SideMenu extends StatelessWidget {
           ListTile(
               leading: const Icon(
                 Icons.exit_to_app,
-                color: Colors.red,
+                color: Colors.blue,
               ),
               title: const Text('Log Out',
                   style: TextStyle(fontFamily: 'ProximaNova', fontSize: 17)),

@@ -8,7 +8,7 @@ Widget showCard(BuildContext context, String title, String subTitle,
     String date, String time, final _firestore) {
   return Container(
       height: 110,
-      color: Colors.red,
+      color: Colors.blue,
       child: Card(
         elevation: 8,
         color: Colors.white,
@@ -30,7 +30,7 @@ Widget showCard(BuildContext context, String title, String subTitle,
                   icon: const Icon(
                     Icons.edit_rounded,
                   ),
-                  color: Colors.red,
+                  color: Colors.blue,
                 ),
                 IconButton(
                   constraints: const BoxConstraints(),
@@ -62,7 +62,7 @@ Widget showCard(BuildContext context, String title, String subTitle,
                     //await _firestore.instance.collection('ToDo').document();
                   },
                   icon: const Icon(Icons.delete_rounded),
-                  color: Colors.red,
+                  color: Colors.blue,
                 ),
               ],
             ),

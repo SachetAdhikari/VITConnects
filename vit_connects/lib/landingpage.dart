@@ -17,7 +17,7 @@ class LandingPage extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
-              color: Colors.red,
+              color: Colors.blue,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(15))),
         margin: const EdgeInsets.symmetric(horizontal: 60),
@@ -28,7 +28,7 @@ class LandingPage extends StatelessWidget {
               textt,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  fontSize: 20, color: Colors.red, fontFamily: 'ProximaNova'),
+                  fontSize: 20, color: Colors.blue, fontFamily: 'ProximaNova'),
             ),
           ],
         ),
@@ -40,7 +40,7 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.lightBlue,
       body: Column(
         children: [
           Container(
@@ -55,6 +55,14 @@ class LandingPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 50.0),
                   child: Column(
                     children: const [
+                      // Padding(
+                      //     padding: EdgeInsets.only(right: 20.0),
+                      //      icon: ImageIcon(
+                      //         AssetImage("images/icon.png"),
+                      //         size: 4,),
+                      //     )
+                      // ),
+                      //
                       Text(
                         "WELCOME",
                         style: TextStyle(

@@ -69,7 +69,7 @@ class _FormssState extends State<Formss> {
         title: const Text("To Do Details",
             style: TextStyle(
                 fontFamily: 'ProximaNova', fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -160,8 +160,8 @@ class _FormssState extends State<Formss> {
                         height: 60,
                         margin: const EdgeInsets.symmetric(horizontal: 60),
                         decoration: BoxDecoration(
-                            color: Colors.red,
-                            border: Border.all(color: Colors.red),
+                            color: Colors.blue,
+                            border: Border.all(color: Colors.blue),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(30))),
                         child: Row(

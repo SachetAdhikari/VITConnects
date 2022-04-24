@@ -93,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.blue,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -202,7 +202,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                         ),
                         Material(
-                          color: Colors.red,
+                          color: Colors.blue,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(30.0)),
                           elevation: 5.0,
@@ -258,7 +258,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
+                              primary: Colors.blue,
                               onPrimary: Colors.white,
                               minimumSize: Size(250, 60),
                               shape: RoundedRectangleBorder(
